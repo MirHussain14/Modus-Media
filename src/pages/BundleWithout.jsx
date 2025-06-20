@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
 import BundleServices from "../components/BundleServices";
 import BundlePricing from "../components/BundlePricing";
-const BundleWith = () => {
+const BundleWithout = () => {
   const [mondayData, setMondayData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,13 +53,14 @@ const BundleWith = () => {
 
   const package2Features = [
     {
-  icon: "/uilMusic.svg",
-  text: (
-    <>
-      מערכת מחשב + יחידת הגברה <br/> Modus Mini Box
-    </>
-  ),
-},
+      icon: "/uilMusic.svg",
+      text: (
+        <>
+          מערכת מחשב + יחידת הגברה <br />{" "}
+          <span className="text-blue-500">Modus Mini Box</span>
+        </>
+      ),
+    },
     {
       icon: "/Music.svg",
       text: "תכני מוסיקה בהתאמה אישית כולל כל עדויות המהלומים",
@@ -153,4 +154,4 @@ const BundleWith = () => {
   );
 };
 
-export default BundleWith;
+export default BundleWithout;

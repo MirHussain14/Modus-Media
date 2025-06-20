@@ -1,12 +1,13 @@
 // App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import BundleWithout from "./pages/BundleWith";
+import BundleWithout from "./pages/BundleWithout";
 import OneWithout from "./pages/OneWithout";
 import TwoVIP from "./pages/TwoVIP";
 import TwoWith from "./pages/TwoWith";
 import TwoWithout from "./pages/TwoWithout";
 import Vbdeo from "./pages/Vbdeo";
 import Video from "./pages/Video";
+import BundleWith from './pages/BundleWith';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path="/twovip" element={<TwoVIP />} />
         <Route path="/vbdeo" element={<Vbdeo />} />
         <Route path="/bundlewithout" element={<BundleWithout />} />
+        <Route path="/bundlewith" element={<BundleWith />} />
       </Routes>
     </Router>
   );

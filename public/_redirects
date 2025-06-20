@@ -1,0 +1,18 @@
+# SPA fallback - redirect all routes to index.html
+/*    /index.html   200
+
+# API routes to Netlify Functions
+/api/*  /.netlify/functions/:splat  200
+
+# Redirect old URLs
+/old-page  /new-page  301
+/blog/old-post  /blog/new-post  301
+
+# Custom 404 page
+/*    /404.html   404
+
+# Proxy external API (avoid CORS)
+/proxy/*  https://api.example.com/:splat  200
+
+# Force HTTPS
+http://example.com/*  https://example.com/:splat  301!

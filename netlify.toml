@@ -1,0 +1,58 @@
+[build]
+  # Build command and publish directory
+  command = "npm run build"
+  publish = "dist"
+  # or "build" for Create React App, "out" for Next.js static export
+
+[build.environment]
+  # Environment variables for build
+  NODE_VERSION = "18"
+
+# Redirect rules for SPA routing
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  conditions = {Role = ["admin"]}
+
+# API routes (if using Netlify Functions)
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Custom 404 page
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Form handling
+[build.processing]
+  skip_processing = false
+[build.processing.css]
+  bundle = true
+  minify = true
+[build.processing.js]
+  bundle = true
+  minify = true
+[build.processing.html]
+  pretty_urls = true
+
+# Netlify Functions (serverless functions)
+[functions]
+  directory = "netlify/functions"

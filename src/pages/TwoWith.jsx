@@ -52,24 +52,57 @@ const TwoWith = () => {
   const package2Features = [
     {
       icon: "/uilMusic.svg",
-      text: "מערכת מחשב Modus Mini Box",
+      text: (
+        <>
+          מערכת מחשב <br />
+          <span className="text-blue-500">Modus Mini Box</span>
+        </>
+      ),
     },
     {
       icon: "/Music.svg",
-      text: "תכני מוסיקה בהתאמה אישית כולל כל עדויות המהלומים",
+      text: (
+        <>
+          תכני מוסיקה בהתאמה אישית <br />
+          <span className="text-blue-500">כולל כל עלויות התמלוגים</span>
+        </>
+      ),
     },
-    { icon: "/Settings.svg", text: "עדכוני מוסיקה שוטפים בהתאם לפרופיל העסקי" },
+    {
+      icon: "/Settings.svg",
+      text: (
+        <>
+          עדכוני מוסיקה שוטפים <br />
+          בהתאם לפרופיל העסקי
+        </>
+      ),
+    },
     {
       icon: "/Play.svg",
-      text: "תוכנת נגן ורישיון שימוש בה",
+      text: (
+        <>
+          תוכנת נגן <br />
+          ורישיון שימוש בה
+        </>
+      ),
     },
     {
       icon: "/Phone.svg",
-      text: "אפליקצית מובייל (iOS, Android) שליט ריחוק השולטת בתוכנת הנגן",
+      text: (
+        <>
+          אפליקציית מובייל (iOS, Android) <br />
+          שלט רחוק השולט בתוכנת הנגן
+        </>
+      ),
     },
     {
       icon: "/Tools.svg",
-      text: "תמיכה טכנית עבור תוכנת הנגן ואפליקצית המובייל",
+      text: (
+        <>
+          תמיכה טכנית עבור תוכנת הנגן <br />
+          ואפליקציות המובייל
+        </>
+      ),
     },
   ];
 

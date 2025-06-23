@@ -52,16 +52,39 @@ const Vbdeo = () => {
   const package2Features = [
     {
       icon: "/uilMusic.svg",
-      text: "מערכת מחשב Modus Video Box OS",
+      text: (
+        <>
+          מערכת מחשב <br />
+          <span className="text-blue-500">Modus Video Box</span>
+        </>
+      ),
     },
-    { icon: "/Settings.svg", text: "תזמון והפעלה אוטומטיים בהתאם לשעות הפעילות" },
+    {
+      icon: "/Settings.svg",
+      text: (
+        <>
+          תזמון והפעלה אוטומטיים <br />
+          בהתאם לשעות הפעילות
+        </>
+      ),
+    },
     {
       icon: "/Play.svg",
-      text: "נגן וידאו חכם , פתרון ענן. עד 2 מסכים , תכני וידאו מותאמים",
+      text: (
+        <>
+          2 מסכים תכני וידאו מותאמים<br /> נגן וידאו חכם פתרון ענן 
+
+        </>
+      ),
     },
     {
       icon: "/Tools.svg",
-      text: "תמיכה טכנית עבור מערכת נגן Modus Media Box",
+      text: (
+        <>
+          תמיכה טכנית עבור מערכת נגן <br />
+          <span className="text-blue-500">Modus Media Box</span>
+        </>
+      ),
     },
   ];
 

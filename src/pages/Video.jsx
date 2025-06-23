@@ -52,16 +52,43 @@ const Video = () => {
   const package2Features = [
     {
       icon: "/uilMusic.svg",
-      text: "מערכת מחשב Modus Video Box",
+      text: (
+        <>
+          מערכת מחשב
+          <br />
+          <span className="text-blue-500">Modus Video Box</span>
+        </>
+      ),
     },
-    { icon: "/Settings.svg", text: "עדכוני מוסיקה שוטפים בהתאם לפרופיל העסקי" },
+    {
+      icon: "/Settings.svg",
+      text: (
+        <>
+          תזמון והפעלה אוטומטיים
+          <br />
+          בהתאם לשעות הפעילות
+        </>
+      ),
+    },
     {
       icon: "/Play.svg",
-      text: "תוכנת נגן התמקמת על מחשב לקוות לרגעים רגישים שימושי בה",
+      text: (
+        <>
+          נגן וידאו חכם פתרון ענן עד 2 מסכים
+          <br />
+          תכני וידאו מותאמים
+        </>
+      ),
     },
     {
       icon: "/Tools.svg",
-      text: "תמיכה טכנית עבור מערכת נגן Modus Media Box",
+      text: (
+        <>
+          תמיכה טכנית עבור מערכת נגן
+          <br />
+          <span className="text-blue-500">Modus Media Box</span>
+        </>
+      ),
     },
   ];
 

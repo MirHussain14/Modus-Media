@@ -40,7 +40,7 @@ const BusinessServicesCard = ({
   const displayFeatures = features.length > 0 ? features : defaultFeatures;
 
   return (
-    <div className="bg-[#FAFAFA] max-w-[450px] rounded-3xl p-8 text-right flex flex-col justify-between relative">
+    <div className="bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl p-8 text-right flex flex-col justify-between relative">
       <h1
         dir="rtl"
         className="text-center font-semibold text-4xl w-[80%] mx-auto text-[#0c1d50] mb-2 leading-snug"

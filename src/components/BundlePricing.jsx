@@ -30,14 +30,14 @@ const BundlePricing = ({ title, number, features, mondayData }) => {
     >
       <div>
         <div className="mb-15">
-          <div className="text-apna text-4xl mb-2">{title}</div>
+          <div className="text-apna text-2xl md:text-4xl mb-2">{title}</div>
           <div className="flex items-center justify-end space-x-2">
-            <div className="bg-apna text-white rounded-3xl p-4 text-5xl flex items-center justify-center font-bold">
+            <div className="bg-apna text-white rounded-3xl p-4 text-3xl md:text-5xl flex items-center justify-center font-bold">
               {number}
             </div>
             <span className="text-6xl font-light text-gray-800">media</span>
           </div>
-          <div className="text-2xl text-gray-800 text-left ps-14">music & video</div>
+          <div className="text-lg md:text-2xl text-gray-800 text-left md:ps-14">music & video</div>
           <div className="text-lg text-gray-500 mt-1">החבילה כוללת:</div>
         </div>
 

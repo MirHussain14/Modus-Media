@@ -50,14 +50,14 @@ const Header = () => {
   }, []);
 
   return (
-    <div dir="ltr" className="relative bg-[#0c1d50] text-white px-3 sm:px-6 md:px-8 py-4 sm:py-5 md:py-7 pe-6 md:pe-10 lg:pe-60 rounded-2xl sm:rounded-3xl md:rounded-4xl flex w-full md:max-w-[1000.97px] max-h-[435.84px] mx-auto">
+    <div dir="ltr" className="relative bg-[#0c1d50] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-7 pe-6 md:pe-10 lg:pe-60 rounded-2xl sm:rounded-3xl md:rounded-4xl flex w-full md:max-w-[1000.97px] max-h-[435.84px] mx-auto">
       {/* Vertical Label */}
       <div className="absolute -top-[7%] right-3 md:right-10 h-full">
         <div className="bg-blue-500 h-[115%] w-20 sm:w-24 md:w-28 lg:w-36 rounded-md sm:rounded-lg flex items-center justify-center">
           <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute -left-[8%] top-[2.7%] -z-1 rotate-[41deg] md:rotate-45"></div>
           <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute md:-left-[8%] -left-[7%] -bottom-[12%] md:-bottom-[12.5%] -z-1 rotate-[55deg] md:rotate-45"></div>
           <span
-            className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold transform rotate-180"
+            className="text-white text-2xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold transform rotate-180 ps-20 md:ps-0"
             style={{ writingMode: "vertical-rl" }}
           >
             מודוס <span className="font-light">מדיה</span>
@@ -92,7 +92,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div dir="rtl" className="lg:text-right lg:mt-0 mt-3 sm:mt-4 md:mt-5 space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-8 lg:ml-20">
+        <div dir="rtl" className="lg:mt-0 mt-3 sm:mt-4 md:mt-5 space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-8 lg:ml-20 w-[70%] lg:w-auto">
           <div>
             <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold">מודוס</span>
             <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-md"> מדיה</span>

@@ -5,18 +5,18 @@ import Footer from "../components/Footer";
 import BusinessServicesCard from "../components/BusinessServicesCard";
 import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
+
 const Video = () => {
   const [mondayData, setMondayData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch Monday.com data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getItemWithParentBoardRelation();
         if (response && response.length > 0) {
-          setMondayData(response); // Get the first item
+          setMondayData(response);
         }
       } catch (err) {
         setError(err.message);
@@ -34,7 +34,10 @@ const Video = () => {
       icon: "/Music.svg",
       text: "תכני מוסיקה בהתאמה אישית כולל כל עדויות המהלומים",
     },
-    { icon: "/Settings.svg", text: "עדכוני מוסיקה שוטפים בהתאם לפרופיל העסקי" },
+    {
+      icon: "/Settings.svg",
+      text: "עדכוני מוסיקה שוטפים בהתאם לפרופיל העסקי",
+    },
     {
       icon: "/Play.svg",
       text: "תוכנת נגן התמקמת על מחשב לקוות לרגעים רגישים שימושי בה",
@@ -54,9 +57,8 @@ const Video = () => {
       icon: "/uilMusic.svg",
       text: (
         <>
-          מערכת מחשב
-          <br />
-          <span className="text-blue-500">Modus Video Box</span>
+          מערכת מחשב <br />
+          <span className="text-apna">Modus Video Box</span>
         </>
       ),
     },
@@ -64,8 +66,7 @@ const Video = () => {
       icon: "/Settings.svg",
       text: (
         <>
-          תזמון והפעלה אוטומטיים
-          <br />
+          תזמון והפעלה אוטומטיים <br />
           בהתאם לשעות הפעילות
         </>
       ),
@@ -74,8 +75,7 @@ const Video = () => {
       icon: "/Play.svg",
       text: (
         <>
-          נגן וידאו חכם פתרון ענן עד 2 מסכים
-          <br />
+          נגן וידאו חכם, פתרון ענן עד 2 מסכים <br />
           תכני וידאו מותאמים
         </>
       ),
@@ -84,15 +84,13 @@ const Video = () => {
       icon: "/Tools.svg",
       text: (
         <>
-          תמיכה טכנית עבור מערכת נגן
-          <br />
-          <span className="text-blue-500">Modus Media Box</span>
+          תמיכה טכנית עבור מערכת נגן <br />
+          <span className="text-apna">Modus Media Box</span>
         </>
       ),
     },
   ];
 
-  // Show loading state
   if (loading) {
     return (
       <div className="min-h-screen p-8 xl:px-64">
@@ -108,7 +106,6 @@ const Video = () => {
     );
   }
 
-  // Show error state
   if (error) {
     return (
       <div className="min-h-screen p-8 xl:px-64">
@@ -129,10 +126,10 @@ const Video = () => {
   return (
     <div className="min-h-screen p-8 xl:px-64">
       <Header />
-      <div className="flex flex-col md:flex-row gap-5 justify-between md:mt-20 w-full mt-14">
+      <div className="flex flex-col md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
         <BusinessServicesCard
           title="מדעי עסקים בוחרים"
-          subtitle="במדיום מדיה"
+          subtitle="במודוס מדיה"
           packageTitle="חבילת"
           packageNumber="1"
           features={package1Features}
@@ -148,7 +145,6 @@ const Video = () => {
           mondayData={mondayData}
         />
       </div>
-
       <ClientsSection />
       <Footer />
     </div>

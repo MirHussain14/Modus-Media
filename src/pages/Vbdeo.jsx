@@ -55,7 +55,7 @@ const Vbdeo = () => {
       text: (
         <>
           מערכת מחשב <br />
-          <span className="text-blue-500">Modus Video Box</span>
+          <span className="text-apna">Modus Video Box</span>
         </>
       ),
     },
@@ -82,7 +82,7 @@ const Vbdeo = () => {
       text: (
         <>
           תמיכה טכנית עבור מערכת נגן <br />
-          <span className="text-blue-500">Modus Media Box</span>
+          <span className="text-apna">Modus Media Box</span>
         </>
       ),
     },
@@ -91,7 +91,7 @@ const Vbdeo = () => {
   // Show loading state
   if (loading) {
     return (
-      <div className="min-h-screen p-8 xl:px-64">
+      <div className="min-h-screen p-8 xl:px-64 text-left">
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
@@ -125,7 +125,7 @@ const Vbdeo = () => {
   return (
     <div className="min-h-screen p-8 xl:px-64">
       <Header />
-      <div className="flex flex-col md:flex-row gap-5 justify-between md:mt-20 w-full mt-14">
+      <div className="flex flex-col md:flex-row gap-5 justify-center md:mt-20 w-full mt-14">
         <BusinessServicesCard
           title="מדעי עסקים בוחרים"
           subtitle="במדיום מדיה"

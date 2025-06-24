@@ -40,9 +40,14 @@ const BusinessServicesCard = ({
   const displayFeatures = features.length > 0 ? features : defaultFeatures;
 
   return (
-    <div className="bg-[#FAFAFA] w-full md:w-[40%] rounded-3xl p-8 text-right flex flex-col justify-between relative">
-      <h1 className='text-center font-semibold text-4xl w-[8
-      0%] mx-auto text-[#0c1d50] mb-2'>מדוע עסקים בוחרים במודוס מדיה</h1>
+    <div className="bg-[#FAFAFA] max-w-[450px] rounded-3xl p-8 text-right flex flex-col justify-between relative">
+      <h1
+        dir="rtl"
+        className="text-center font-semibold text-4xl w-[80%] mx-auto text-[#0c1d50] mb-2 leading-snug"
+      >
+        מדוע עסקים בוחרים <br />
+        במודוס <span className="font-light">מדיה</span>
+      </h1>
       <div className="relative">
         <div className="background w-full">
           <img className='w-[110%]' src="/Vector 9 (Stroke).png" alt="" />

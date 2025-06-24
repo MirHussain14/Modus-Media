@@ -1,6 +1,19 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@font-face {
+  font-family: 'MyCustomFont';
+  src: url('/public/PloniRegular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
 
-body,html {
-  font-family: "Outfit", sans-serif !important;
+body {
+  font-family: 'MyCustomFont', sans-serif;
+}
+
+.text-apna{
+  color: #016AD3 !important;
+}
+
+.bg-apna{
+  background-color: #016AD3 !important;
 }

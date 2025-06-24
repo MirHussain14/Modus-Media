@@ -26,13 +26,13 @@ const PricingCard = ({ title, number, features, mondayData }) => {
 
   return (
     <div
-      className={`bg-[#FAFAFA] w-full md:w-[40%] rounded-3xl p-8 text-right flex flex-col justify-between `}
+      className={`bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl p-8 text-right flex flex-col justify-between relative`}
     >
       <div>
-        <div className="mb-15">
-          <div className="text-blue-500 text-4xl mb-2">{title}</div>
+        <div className="mb-10">
+          <div className="text-apna text-4xl mb-2">{title}</div>
           <div className="flex items-center justify-end space-x-2">
-            <div className="bg-blue-500 text-white rounded-3xl w-20 h-20 text-4xl flex items-center justify-center font-bold">
+            <div className="bg-apna text-white rounded-3xl w-20 h-20 text-4xl flex items-center justify-center font-bold">
               {number}
             </div>
             <span className="text-6xl font-light text-gray-800">media</span>
@@ -40,7 +40,7 @@ const PricingCard = ({ title, number, features, mondayData }) => {
           <div className="text-sm text-gray-500 mt-1">החבילה כוללת:</div>
         </div>
 
-        <div className="space-y-11">
+        <div className="space-y-8">
           {features.map((feature, index) => (
             <FeatureItem key={index} icon={feature.icon} text={feature.text} />
           ))}
@@ -61,7 +61,7 @@ const PricingCard = ({ title, number, features, mondayData }) => {
         </div>
         <div className="text-left">
           <span className="text-5xl text-gray-600 mr-2">₪</span>
-          <span className="text-7xl font-bold text-blue-500">{displayPrice}</span>
+          <span className="text-7xl font-bold text-apna">{displayPrice}</span>
         </div>
       </div>
     </div>

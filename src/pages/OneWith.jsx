@@ -5,10 +5,8 @@ import Footer from "../components/Footer";
 import BusinessServicesCard from "../components/BusinessServicesCard";
 import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
-import BundleServices from "../components/BundleServices";
-import BundlePricing from "../components/BundlePricing";
 
-const BundleWith = () => {
+const OneWith = () => {
   const [mondayData, setMondayData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -53,32 +51,20 @@ const BundleWith = () => {
 
   const package2Features = [
     {
-      icon: "/uilMusic.svg",
-      text: (
-        <>
-          מערכת מחשב + <span className="text-apna">יחידת הגברה</span>
-          <br />
-          <span className="text-apna">Modus Mini Box</span>
-        </>
-      ),
-    },
-    {
       icon: "/Music.svg",
       text: (
         <>
-          תכני מוסיקה בהתאמה אישית
-          <br />
-          <span className="text-apna">כולל כל עדויות התמלולים</span>
+          תכני מוסיקה בהתאמה אישית <br />
+          <span className="text-apna">כולל כל עלויות התמלוגים</span>
         </>
       ),
     },
     {
-      icon: "/Reload.svg",
+      icon: "/Settings.svg",
       text: (
         <>
-          עדכוני מוסיקה שוטפים בהתאם
-          <br />
-          לפרופיל העסקי
+          עדכוני מוסיקה שוטפים <br />
+          בהתאם לפרופיל העסקי
         </>
       ),
     },
@@ -86,9 +72,8 @@ const BundleWith = () => {
       icon: "/Play.svg",
       text: (
         <>
-          תוכנת נגן
-          <br />
-          ורישיון שימוש בה
+          תוכנת נגן המותקנת על מחשב <br />
+          לקוח לרבות רישיון שימוש בה
         </>
       ),
     },
@@ -96,29 +81,8 @@ const BundleWith = () => {
       icon: "/Phone.svg",
       text: (
         <>
-          אפליקציית מובייל (iOS, Android)
-          <br />
+          אפליקציית מובייל (iOS, Android) <br />
           שלט רחוק השולט בתוכנת הנגן
-        </>
-      ),
-    },
-    {
-      icon: "/Cloud.svg",
-      text: (
-        <>
-          נגן וידאו חכם, פתרון ענן עד 2 מסכים
-          <br />
-          תכני וידאו מותאמים
-        </>
-      ),
-    },
-    {
-      icon: "/Calendar.svg",
-      text: (
-        <>
-          תזמון והפעלה אוטומטיים
-          <br />
-          בהתאם לשעות הפעילות
         </>
       ),
     },
@@ -126,8 +90,7 @@ const BundleWith = () => {
       icon: "/Tools.svg",
       text: (
         <>
-          תמיכה טכנית עבור תוכנת הנגן
-          <br />
+          תמיכה טכנית עבור תוכנת הנגן <br />
           ואפליקציית המובייל
         </>
       ),
@@ -155,7 +118,9 @@ const BundleWith = () => {
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
-            <div className="text-xl text-red-500">שגיאה בטעינת הנתונים: {error}</div>
+            <div className="text-xl text-red-500">
+              שגיאה בטעינת הנתונים: {error}
+            </div>
           </div>
         </div>
         <ClientsSection />
@@ -168,7 +133,7 @@ const BundleWith = () => {
     <div className="min-h-screen p-8 xl:px-64">
       <Header />
       <div className="flex flex-col md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
-        <BundleServices
+        <BusinessServicesCard
           title="מדעי עסקים בוחרים"
           subtitle="במודוס מדיה"
           packageTitle="חבילת"
@@ -178,19 +143,18 @@ const BundleWith = () => {
           currency="₪"
           priceNote="+ מע״מ לחודש לנקודת נגיעה"
         />
-        <BundlePricing
+        <PricingCard
           title="חבילת"
-          number="bundle"
+          number="1"
           features={package2Features}
           price="170"
           mondayData={mondayData}
         />
       </div>
-
       <ClientsSection />
       <Footer />
     </div>
   );
 };
 
-export default BundleWith;
+export default OneWith;

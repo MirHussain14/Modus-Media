@@ -8,6 +8,7 @@ import TwoWithout from "./pages/TwoWithout";
 import Vbdeo from "./pages/Vbdeo";
 import Video from "./pages/Video";
 import BundleWith from './pages/BundleWith';
+import OneWith from './pages/OneWith';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         {/* Page routes */}
         <Route path="/twowith" element={<TwoWith />} />
         <Route path="/onewithout" element={<OneWithout />} />
+        <Route path="/onewith" element={<OneWith />} />
         <Route path="/twowithout" element={<TwoWithout />} />
         <Route path="/video" element={<Video />} />
         <Route path="/twovip" element={<TwoVIP />} />

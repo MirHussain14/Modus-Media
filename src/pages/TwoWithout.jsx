@@ -5,18 +5,18 @@ import Footer from "../components/Footer";
 import BusinessServicesCard from "../components/BusinessServicesCard";
 import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
+
 const TwoWithout = () => {
   const [mondayData, setMondayData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch Monday.com data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getItemWithParentBoardRelation();
         if (response && response.length > 0) {
-          setMondayData(response); // Get the first item
+          setMondayData(response);
         }
       } catch (err) {
         setError(err.message);
@@ -34,7 +34,10 @@ const TwoWithout = () => {
       icon: "/Music.svg",
       text: "תכני מוסיקה בהתאמה אישית כולל כל עדויות המהלומים",
     },
-    { icon: "/Settings.svg", text: "עדכוני מוסיקה שוטפים בהתאם לפרופיל העסקי" },
+    {
+      icon: "/Settings.svg",
+      text: "עדכוני מוסיקה שוטפים בהתאם לפרופיל העסקי",
+    },
     {
       icon: "/Play.svg",
       text: "תוכנת נגן התמקמת על מחשב לקוות לרגעים רגישים שימושי בה",
@@ -55,7 +58,7 @@ const TwoWithout = () => {
       text: (
         <>
           מערכת מחשב <br />
-          <span className="text-blue-500">Modus Mini Box</span>
+          <span className="text-apna">Modus Mini Box</span>
         </>
       ),
     },
@@ -64,7 +67,7 @@ const TwoWithout = () => {
       text: (
         <>
           תכני מוסיקה בהתאמה אישית <br />
-          <span className="text-blue-500">כולל כל עלויות התמלוגים</span>
+          <span className="text-apna">כולל כל עלויות התמלוגים</span>
         </>
       ),
     },
@@ -106,7 +109,6 @@ const TwoWithout = () => {
     },
   ];
 
-  // Show loading state
   if (loading) {
     return (
       <div className="min-h-screen p-8 xl:px-64">
@@ -122,7 +124,6 @@ const TwoWithout = () => {
     );
   }
 
-  // Show error state
   if (error) {
     return (
       <div className="min-h-screen p-8 xl:px-64">
@@ -143,10 +144,10 @@ const TwoWithout = () => {
   return (
     <div className="min-h-screen p-8 xl:px-64">
       <Header />
-      <div className="flex flex-col md:flex-row gap-5 justify-between md:mt-20 w-full mt-14">
+      <div className="flex flex-col md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
         <BusinessServicesCard
           title="מדעי עסקים בוחרים"
-          subtitle="במדיום מדיה"
+          subtitle="במודוס מדיה"
           packageTitle="חבילת"
           packageNumber="1"
           features={package1Features}
@@ -162,7 +163,6 @@ const TwoWithout = () => {
           mondayData={mondayData}
         />
       </div>
-
       <ClientsSection />
       <Footer />
     </div>
@@ -170,4 +170,3 @@ const TwoWithout = () => {
 };
 
 export default TwoWithout;
-// 

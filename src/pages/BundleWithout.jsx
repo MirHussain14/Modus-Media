@@ -7,18 +7,18 @@ import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
 import BundleServices from "../components/BundleServices";
 import BundlePricing from "../components/BundlePricing";
+
 const BundleWithout = () => {
   const [mondayData, setMondayData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch Monday.com data on component mount
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getItemWithParentBoardRelation();
         if (response && response.length > 0) {
-          setMondayData(response); // Get the first item
+          setMondayData(response);
         }
       } catch (err) {
         setError(err.message);
@@ -56,9 +56,9 @@ const BundleWithout = () => {
       icon: "/uilMusic.svg",
       text: (
         <>
-          מערכת מחשב + <span className="text-blue-500">יחידת הגברה</span>
+          מערכת מחשב + <span className="text-apna">יחידת הגברה</span>
           <br />
-          <span className="text-blue-500">Modus Mini Box</span>
+          <span className="text-apna">Modus Mini Box</span>
         </>
       ),
     },
@@ -68,7 +68,7 @@ const BundleWithout = () => {
         <>
           תכני מוסיקה בהתאמה אישית
           <br />
-          <span className="text-blue-500">כולל כל עדויות התמלולים</span>
+          <span className="text-apna">כולל כל עדויות התמלולים</span>
         </>
       ),
     },
@@ -134,8 +134,6 @@ const BundleWithout = () => {
     },
   ];
 
-
-  // Show loading state
   if (loading) {
     return (
       <div className="min-h-screen p-8 xl:px-64">
@@ -151,16 +149,13 @@ const BundleWithout = () => {
     );
   }
 
-  // Show error state
   if (error) {
     return (
       <div className="min-h-screen p-8 xl:px-64">
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
-            <div className="text-xl text-red-500">
-              שגיאה בטעינת הנתונים: {error}
-            </div>
+            <div className="text-xl text-red-500">שגיאה בטעינת הנתונים: {error}</div>
           </div>
         </div>
         <ClientsSection />
@@ -172,10 +167,10 @@ const BundleWithout = () => {
   return (
     <div className="min-h-screen p-8 xl:px-64">
       <Header />
-      <div className="flex flex-col md:flex-row gap-5 justify-between md:mt-20 w-full mt-14">
+      <div className="flex flex-col md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
         <BundleServices
           title="מדעי עסקים בוחרים"
-          subtitle="במדיום מדיה"
+          subtitle="במודוס מדיה"
           packageTitle="חבילת"
           packageNumber="1"
           features={package1Features}
@@ -191,7 +186,6 @@ const BundleWithout = () => {
           mondayData={mondayData}
         />
       </div>
-
       <ClientsSection />
       <Footer />
     </div>

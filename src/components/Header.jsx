@@ -67,7 +67,7 @@ const Header = () => {
           <div className="flex items-center space-x-4 mb-4">
             {/* Logo Icon (Triangle-like) */}
             <div className="w-8 h-8 rounded flex items-center justify-center">
-              <img src="../public/Group.svg" alt="" />
+              <img src="/Group.svg" alt="" />
             </div>
             <span className="text-2xl lg:text-4xl font-light w-full">
               <span className="font-bold">modus</span> media

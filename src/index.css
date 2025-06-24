@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @font-face {
   font-family: 'MyCustomFont';
-  src: url('/public/PloniRegular.otf') format('opentype');
+  src: url('/PloniRegular.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }

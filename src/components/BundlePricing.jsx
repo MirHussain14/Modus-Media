@@ -7,7 +7,7 @@ const BundlePricing = ({ title, number, features, mondayData }) => {
     if (mondayData[0].column_values[0].text) {
       const priceText = mondayData[0].column_values[0].text;
       console.log("Price Text:", priceText);
-      return mondayData[0].column_values[0].text || '170'; // Fallback to 170 if no value is found
+      return mondayData[0].column_values[0].text || "170"; // Fallback to 170 if no value is found
     }
   };
 
@@ -37,7 +37,9 @@ const BundlePricing = ({ title, number, features, mondayData }) => {
             </div>
             <span className="text-6xl font-light text-gray-800">media</span>
           </div>
-          <div className="text-lg md:text-2xl text-gray-800 text-left md:ps-14">music & video</div>
+          <div className="text-lg md:text-2xl text-gray-800 text-left md:ps-14">
+            music & video
+          </div>
           <div className="text-lg text-gray-500 mt-1">החבילה כוללת:</div>
         </div>
 
@@ -48,21 +50,17 @@ const BundlePricing = ({ title, number, features, mondayData }) => {
         </div>
       </div>
 
-      <div className="flex w-full ps-3 ms-auto items-center justify-between mt-20">
+      <div className="flex justify-between md:gap-0 w-full ps-3 ms-auto items-center mt-20">
         <div className="right">
-          <div className="text-right">
-            <span className="text-md text-blue-900">+ מע"מ</span>
-          </div>
-          <div className="text-right">
-            <span className="text-md text-gray-500">לחודש</span>
-          </div>
-          <div className="text-right">
-            <span className="text-md text-gray-500">{quantityText}</span>
-          </div>
+          <p className="text-sm md:text-md text-blue-900">+ מע"מ</p>
+          <p className="text-sm md:text-md text-gray-500">לחודש</p>
+          <p className="text-sm md:text-md text-gray-500">{quantityText}</p>
         </div>
         <div className="text-left">
-          <span className="text-5xl text-gray-600 mr-2">₪</span>
-          <span className="text-7xl font-bold text-apna">{displayPrice}</span>
+          <span className="text-3xl md:text-5xl text-gray-600 mr-2">₪</span>
+          <span className="text-5xl md:text-7xl font-bold text-apna">
+            {displayPrice}
+          </span>
         </div>
       </div>
     </div>

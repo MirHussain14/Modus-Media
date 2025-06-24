@@ -7,6 +7,8 @@ import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
 import BundleServices from "../components/BundleServices";
 import BundlePricing from "../components/BundlePricing";
+import BundleServicesCard from "../components/BundleServices";
+import FooterMobile from "../components/FooterMobile";
 
 const BundleWith = () => {
   const [mondayData, setMondayData] = useState(null);
@@ -106,8 +108,7 @@ const BundleWith = () => {
       icon: "/Cloud.svg",
       text: (
         <>
-          נגן וידאו חכם, פתרון ענן עד 2 מסכים
-          <br />
+          ם , פתרון ענן. עד 2 <br />
           תכני וידאו מותאמים
         </>
       ),
@@ -155,7 +156,9 @@ const BundleWith = () => {
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
-            <div className="text-xl text-red-500">שגיאה בטעינת הנתונים: {error}</div>
+            <div className="text-xl text-red-500">
+              שגיאה בטעינת הנתונים: {error}
+            </div>
           </div>
         </div>
         <ClientsSection />
@@ -168,7 +171,7 @@ const BundleWith = () => {
     <div className="min-h-screen p-8 xl:px-64">
       <Header />
       <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
-        <BundleServices
+        <BundleServicesCard
           title="מדעי עסקים בוחרים"
           subtitle="במודוס מדיה"
           packageTitle="חבילת"
@@ -189,6 +192,7 @@ const BundleWith = () => {
 
       <ClientsSection />
       <Footer />
+      <FooterMobile/>
     </div>
   );
 };

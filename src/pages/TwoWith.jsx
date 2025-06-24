@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import BusinessServicesCard from "../components/BusinessServicesCard";
 import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
+import FooterMobile from "../components/FooterMobile";
 
 const TwoWith = () => {
   const [mondayData, setMondayData] = useState(null);
@@ -165,6 +166,7 @@ const TwoWith = () => {
       </div>
       <ClientsSection />
       <Footer />
+      <FooterMobile/>
     </div>
   );
 };

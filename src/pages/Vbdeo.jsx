@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import BusinessServicesCard from "../components/BusinessServicesCard";
 import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
+import FooterMobile from "../components/FooterMobile";
 const Vbdeo = () => {
   const [mondayData, setMondayData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -147,6 +148,7 @@ const Vbdeo = () => {
 
       <ClientsSection />
       <Footer />
+      <FooterMobile/>
     </div>
   );
 };

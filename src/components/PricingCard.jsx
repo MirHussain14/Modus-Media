@@ -47,21 +47,15 @@ const PricingCard = ({ title, number, features, mondayData }) => {
         </div>
       </div>
 
-      <div className="flex w-full ps-3 ms-auto items-center justify-between mt-20">
+      <div className="flex justify-between md:gap-0 w-full ps-3 ms-auto items-center mt-20">
         <div className="right">
-          <div className="text-right">
-            <span className="text-md text-blue-900">+ מע"מ</span>
-          </div>
-          <div className="text-right">
-            <span className="text-md text-gray-500">לחודש</span>
-          </div>
-          <div className="text-right">
-            <span className="text-md text-gray-500">{quantityText}</span>
-          </div>
+            <p className="text-sm md:text-md text-blue-900">+ מע"מ</p>
+            <p className="text-sm md:text-md text-gray-500">לחודש</p>
+            <p className="text-sm md:text-md text-gray-500">{quantityText}</p>
         </div>
         <div className="text-left">
-          <span className="text-5xl text-gray-600 mr-2">₪</span>
-          <span className="text-7xl font-bold text-apna">{displayPrice}</span>
+          <span className="text-3xl md:text-5xl text-gray-600 mr-2">₪</span>
+          <span className="text-5xl md:text-7xl font-bold text-apna">{displayPrice}</span>
         </div>
       </div>
     </div>

@@ -112,7 +112,7 @@ const TwoWith = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-8 xl:px-64">
+      <div className="min-h-screen p-8 lg: ">
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
@@ -127,7 +127,7 @@ const TwoWith = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen p-8 xl:px-64">
+      <div className="min-h-screen p-8 lg: ">
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
@@ -143,7 +143,7 @@ const TwoWith = () => {
   }
 
   return (
-    <div className="min-h-screen p-8 xl:px-64">
+    <div className="min-h-screen p-8 lg: ">
       <Header />
       <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
         <BusinessServicesCard

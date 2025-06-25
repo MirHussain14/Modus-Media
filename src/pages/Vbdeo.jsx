@@ -92,7 +92,7 @@ const Vbdeo = () => {
   // Show loading state
   if (loading) {
     return (
-      <div className="min-h-screen p-8 xl:px-64 text-left">
+      <div className="min-h-screen p-8 lg:  text-left">
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
@@ -108,7 +108,7 @@ const Vbdeo = () => {
   // Show error state
   if (error) {
     return (
-      <div className="min-h-screen p-8 xl:px-64">
+      <div className="min-h-screen p-8 lg: ">
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
@@ -124,7 +124,7 @@ const Vbdeo = () => {
   }
 
   return (
-    <div className="min-h-screen p-8 xl:px-64">
+    <div className="min-h-screen p-8 lg: ">
       <Header />
       <div className="flex flex-col md:flex-row gap-5 justify-center md:mt-20 w-full mt-14">
         <BusinessServicesCard

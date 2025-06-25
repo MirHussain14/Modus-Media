@@ -66,7 +66,7 @@ const Header = () => {
       </div>
 
       {/* Left Side */}
-      <div className="flex w-full flex-col lg:flex-row items-start justify-between">
+      <div className="flex w-full flex-col md:flex-row items-start justify-between">
         <div className="flex flex-col space-y-1 h-full justify-between">
           <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 mb-2 sm:mb-3 md:mb-4">
             <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 rounded flex items-center justify-center">
@@ -76,7 +76,7 @@ const Header = () => {
               <span className="font-bold">modus</span> media
             </span>
           </div>
-          <div className="space-y-1 sm:space-y-2 hidden lg:block">
+          <div className="space-y-1 sm:space-y-2 hidden md:block">
             <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
               <Phone className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 fw-bold" />
               <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium">039521528</span>
@@ -92,7 +92,7 @@ const Header = () => {
           </div>
         </div>
 
-        <div dir="rtl" className="lg:mt-0 mt-3 sm:mt-4 md:mt-5 space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-8 lg:ml-20 w-[70%] lg:w-auto">
+        <div dir="ltr" className="lg:mt-0 mt-3 sm:mt-4 md:mt-5 space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-8 w-[70%] lg:w-auto text-right md:pe-34 lg:pe-0">
           <div>
             <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold">מודוס</span>
             <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-md"> מדיה</span>

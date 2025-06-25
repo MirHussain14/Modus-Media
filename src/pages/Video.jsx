@@ -74,12 +74,7 @@ const Video = () => {
     },
     {
       icon: "/Play.svg",
-      text: (
-        <>
-          נגן וידאו חכם, פתרון ענן עד 2 מסכים <br />
-          תכני וידאו מותאמים
-        </>
-      ),
+      text: <>נגן וידאו חכם, פתרון ענן. עד 2 <br/> מסכים. תכני וידאו מותאמים </>,
     },
     {
       icon: "/Tools.svg",
@@ -148,7 +143,7 @@ const Video = () => {
       </div>
       <ClientsSection />
       <Footer />
-      <FooterMobile/>
+      <FooterMobile />
     </div>
   );
 };

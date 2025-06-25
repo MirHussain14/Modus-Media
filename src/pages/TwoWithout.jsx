@@ -67,8 +67,7 @@ const TwoWithout = () => {
       icon: "/Music.svg",
       text: (
         <>
-          תכני מוסיקה בהתאמה אישית <br />
-          <span className="text-apna">כולל כל עלויות התמלוגים</span>
+          תכני מוסיקה <br /> בהתאמה אישית
         </>
       ),
     },

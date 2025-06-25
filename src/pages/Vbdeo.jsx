@@ -55,8 +55,8 @@ const Vbdeo = () => {
       icon: "/uilMusic.svg",
       text: (
         <>
-          מערכת מחשב <br />
-          <span className="text-apna">Modus Video Box</span>
+          מערכת ניהול הודעות על גבי <br />
+          <span className="text-apna">Modus Video Box OS</span>
         </>
       ),
     },
@@ -73,7 +73,7 @@ const Vbdeo = () => {
       icon: "/Play.svg",
       text: (
         <>
-          2 מסכים תכני וידאו מותאמים<br /> נגן וידאו חכם פתרון ענן 
+          ם , פתרון ענן. עד 2 <br /> נגן וידאו חכם פתרון ענן 
 
         </>
       ),
@@ -83,7 +83,7 @@ const Vbdeo = () => {
       text: (
         <>
           תמיכה טכנית עבור מערכת נגן <br />
-          <span className="text-apna">Modus Media Box</span>
+          <span >Modus Media Box</span>
         </>
       ),
     },
@@ -126,7 +126,7 @@ const Vbdeo = () => {
   return (
     <div className="min-h-screen p-8 lg: ">
       <Header />
-      <div className="flex flex-col md:flex-row gap-5 justify-center md:mt-20 w-full mt-14">
+      <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 w-full mt-14">
         <BusinessServicesCard
           title="מדעי עסקים בוחרים"
           subtitle="במדיום מדיה"

@@ -108,8 +108,7 @@ const BundleWith = () => {
       icon: "/Cloud.svg",
       text: (
         <>
-          ם , פתרון ענן. עד 2 <br />
-          תכני וידאו מותאמים
+          נגן וידאו חכם , פתרון ענן עד 2 <br /> מסכים , תכני וידאו מותאמים
         </>
       ),
     },
@@ -192,7 +191,7 @@ const BundleWith = () => {
 
       <ClientsSection />
       <Footer />
-      <FooterMobile/>
+      <FooterMobile />
     </div>
   );
 };

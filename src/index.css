@@ -17,3 +17,62 @@ body {
 .bg-apna{
   background-color: #016AD3 !important;
 }
+/* PDF-specific utility classes */
+.pdf-hide {
+  @apply block;
+}
+
+.pdf-container {
+  @apply w-full;
+}
+
+.compact-card {
+  @apply transition-all duration-200;
+}
+
+.no-page-break {
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+.page-break-before {
+  page-break-before: always;
+}
+
+.page-break-after {
+  page-break-after: always;
+}
+
+/* Print styles for PDF export */
+@media print {
+  @page {
+    size: A2 landscape !important;
+    margin: 0 !important;
+  }
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: white !important;
+    transform: scale(1.1) !important;
+    transform-origin: top left !important;
+  }
+  .fixed, .no-print, .pdf-hide {
+    display: none !important;
+  }
+  .pdf-container {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  .compact-card {
+    margin: 0.2rem !important;
+    padding: 0.5rem !important;
+  }
+  .pdf-safe-colors {
+    --tw-bg-opacity: 1 !important;
+    background-color: rgb(59 130 246 / var(--tw-bg-opacity)) !important;
+  }
+  .pdf-safe-text {
+    --tw-text-opacity: 1 !important;
+    color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
+  }
+}

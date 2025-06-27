@@ -6,10 +6,13 @@ import BusinessServicesCard from "../components/BusinessServicesCard";
 import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
 import FooterMobile from "../components/FooterMobile";
+
 const Vbdeo = () => {
   const [mondayData, setMondayData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isDownloading, setIsDownloading] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
   // Fetch Monday.com data on component mount
   useEffect(() => {
@@ -73,8 +76,7 @@ const Vbdeo = () => {
       icon: "/Play.svg",
       text: (
         <>
-          ם , פתרון ענן. עד 2 <br /> נגן וידאו חכם פתרון ענן 
-
+          פתרון ענן, עד 2 <br /> נגן וידאו חכם פתרון ענן
         </>
       ),
     },
@@ -83,16 +85,28 @@ const Vbdeo = () => {
       text: (
         <>
           תמיכה טכנית עבור מערכת נגן <br />
-          <span >Modus Media Box</span>
+          <span>Modus Media Box</span>
         </>
       ),
     },
   ];
 
+  const downloadPDF = () => {
+    setIsDownloading(true);
+    setShowNotification(true);
+
+    // Print styles are in global CSS (index.css)
+    setTimeout(() => {
+      window.print();
+      setIsDownloading(false);
+      setShowNotification(false);
+    }, 300);
+  };
+
   // Show loading state
   if (loading) {
     return (
-      <div className="min-h-screen p-8 lg:  text-left">
+      <div className="min-h-screen p-8 lg: text-left">
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
@@ -125,30 +139,89 @@ const Vbdeo = () => {
 
   return (
     <div className="min-h-screen p-8 lg: ">
-      <Header />
-      <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 w-full mt-14">
-        <BusinessServicesCard
-          title="מדעי עסקים בוחרים"
-          subtitle="במדיום מדיה"
-          packageTitle="חבילת"
-          packageNumber="1"
-          features={package1Features}
-          price="170"
-          currency="₪"
-          priceNote="+ מע״מ לחודש לנקודת נגיעה"
-        />
-        <PricingCard
-          title="חבילת"
-          number="3"
-          features={package2Features}
-          price="170"
-          mondayData={mondayData}
-        />
+      {/* Notification */}
+      {showNotification && (
+        <div className="fixed top-4 right-4 z-50 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-fade-in">
+          <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+          </svg>
+          מייצא PDF... אנא המתן
+        </div>
+      )}
+
+      {/* PDF Download Button */}
+      <div className="fixed top-4 left-4 z-50">
+        <button
+          onClick={downloadPDF}
+          disabled={isDownloading}
+          className={`
+            flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-white shadow-lg
+            transition-all duration-200 hover:shadow-xl
+            ${
+              isDownloading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700 active:bg-blue-800"
+            }
+          `}
+        >
+          {isDownloading ? (
+            <>
+              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  fill="none"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              מדפיס...
+            </>
+          ) : (
+            <>
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
+              </svg>
+              הדפס כ-PDF
+            </>
+          )}
+        </button>
       </div>
 
-      <ClientsSection />
-      <Footer />
-      <FooterMobile/>
+      {/* Main content wrapped in PDF-content div */}
+      <div id="pdf-content">
+        <Header />
+        <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 w-full mt-14">
+          <BusinessServicesCard
+            title="מדעי עסקים בוחרים"
+            subtitle="במדיום מדיה"
+            packageTitle="חבילת"
+            packageNumber="1"
+            features={package1Features}
+            price="170"
+            currency="₪"
+            priceNote="+ מע״מ לחודש לנקודת נגיעה"
+          />
+          <PricingCard
+            title="חבילת"
+            number="3"
+            features={package2Features}
+            price="170"
+            mondayData={mondayData}
+          />
+        </div>
+        <ClientsSection />
+        <Footer />
+      </div>
+      <FooterMobile />
     </div>
   );
 };

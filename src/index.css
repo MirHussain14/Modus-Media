@@ -17,31 +17,6 @@ body {
 .bg-apna{
   background-color: #016AD3 !important;
 }
-/* PDF-specific utility classes */
-.pdf-hide {
-  @apply block;
-}
-
-.pdf-container {
-  @apply w-full;
-}
-
-.compact-card {
-  @apply transition-all duration-200;
-}
-
-.no-page-break {
-  page-break-inside: avoid;
-  break-inside: avoid;
-}
-
-.page-break-before {
-  page-break-before: always;
-}
-
-.page-break-after {
-  page-break-after: always;
-}
 
 /* Print styles for PDF export */
 @media print {

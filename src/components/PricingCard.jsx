@@ -36,7 +36,7 @@ const PricingCard = ({ title, number, features, mondayData }) => {
             </div>
             <span className="text-6xl outfit-light text-dark">media</span>
           </div>
-          <div className="text-sm text-gray-500 mt-1">החבילה כוללת:</div>
+          <div dir="rtl" className="text-lg text-gray-500 mt-1">החבילה כוללת:</div>
         </div>
 
         <div className="space-y-8">

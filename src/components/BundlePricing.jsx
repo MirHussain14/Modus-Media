@@ -1,28 +1,8 @@
 import React, { useEffect } from "react";
 import FeatureItem from "./FeatureItem";
 
-const BundlePricing = ({ title, number, features, mondayData }) => {
+const BundlePricing = ({ title, number, features }) => {
   // Extract data from Monday.com API response
-  const getDisplayPrice = () => {
-    if (mondayData[0].column_values[0].text) {
-      const priceText = mondayData[0].column_values[0].text;
-      console.log("Price Text:", priceText);
-      return mondayData[0].column_values[0].text || "170"; // Fallback to 170 if no value is found
-    }
-  };
-
-  const getQuantityText = () => {
-    if (mondayData[0].column_values[1]) {
-      const quantity = parseInt(mondayData[0].column_values[1].text);
-      if (quantity > 1) {
-        return `ל-${quantity} נקודות קצה`;
-      }
-    }
-    return "לנקודת קצה"; // Default for quantity <= 1
-  };
-
-  const displayPrice = getDisplayPrice();
-  const quantityText = getQuantityText();
 
   return (
     <div
@@ -40,27 +20,13 @@ const BundlePricing = ({ title, number, features, mondayData }) => {
           <div className="text-lg md:text-2xl text-gray-800 text-left md:ps-14">
             music & video
           </div>
-          <div className="text-lg text-gray-500 mt-1">החבילה כוללת:</div>
+          <div dir="rtl" className="text-lg text-gray-500 mt-1">החבילה כוללת:</div>
         </div>
 
         <div className="space-y-8">
           {features.map((feature, index) => (
             <FeatureItem key={index} icon={feature.icon} text={feature.text} />
           ))}
-        </div>
-      </div>
-
-      <div className="flex justify-between md:gap-0 w-full ps-3 ms-auto items-center mt-20">
-        <div className="right">
-          <p className="text-sm md:text-md text-blue-900">+ מע"מ</p>
-          <p className="text-sm md:text-md text-gray-500">לחודש</p>
-          <p className="text-sm md:text-md text-gray-500">{quantityText}</p>
-        </div>
-        <div className="text-left">
-          <span className="text-3xl md:text-5xl text-gray-600 mr-2">₪</span>
-          <span className="text-5xl md:text-7xl font-bold text-apna">
-            {displayPrice}
-          </span>
         </div>
       </div>
     </div>

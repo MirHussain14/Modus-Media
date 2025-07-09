@@ -5,13 +5,43 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'plonibold';
+  src: url('/PloniBold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Outfit';
+  src: url('/Outfit-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Outfit-light';
+  src: url('/Outfit-Light.ttf') format('truetype');
+}
+
+.ploni-bold{
+  font-family: 'plonibold';
+}
 
 body {
-  font-family: 'MyCustomFont', sans-serif;
+  font-family: 'MyCustomFont', sans-serif !important;
+}
+
+.outfit-light {
+  font-family: 'Outfit-light', sans-serif;
+}
+
+.text-dark{
+  color:#0B225f;
 }
 
 .text-apna{
   color: #016AD3 !important;
+}
+
+.font-outfit{
+  font-family: "Outfit", sans-serif !important;
 }
 
 .bg-apna{

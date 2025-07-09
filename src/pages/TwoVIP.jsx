@@ -6,13 +6,15 @@ import BusinessServicesCard from "../components/BusinessServicesCard";
 import React, { useState, useEffect } from "react";
 import { getItemWithParentBoardRelation } from "../monday";
 import FooterMobile from "../components/FooterMobile";
+import domtoimage from "dom-to-image";
+import { jsPDF } from 'jspdf';
 
 const TwoVIP = () => {
   const [mondayData, setMondayData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
-  const [showNotification, setShowNotification] = useState(false); // Fixed: Moved this up
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,43 +34,167 @@ const TwoVIP = () => {
     fetchData();
   }, []);
 
-  const downloadPDF = () => {
+  // Export the complete website as PDF using dom-to-image, hiding buttons/notifications
+  const downloadSiteSVG = () => {
     setIsDownloading(true);
     setShowNotification(true);
-
-    // Add print styles for landscape, A2, graphics only, no header/footer, and custom scale 110%
-    const printStyles = `
-      <style id="custom-print-style">
-        @media print {
-          @page {
-            size: A2 landscape;
-            margin: 0;
-          }
-          body {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-            background: white !important;
-            transform: scale(1.1) !important;
-            transform-origin: top left !important;
-          }
-          .fixed, .no-print { display: none !important; }
-        }
-      </style>
-    `;
-    const styleElement = document.createElement("div");
-    styleElement.innerHTML = printStyles;
-    document.head.appendChild(styleElement.firstElementChild);
-
-    setTimeout(() => {
-      window.print();
+    
+    // Select the main wrapper (the outermost div with min-h-screen p-8)
+    const mainWrapper = document.querySelector('.min-h-screen.p-8');
+    const button = document.querySelector('.site-export-btn');
+    const notification = document.querySelector('.site-export-notification');
+    // Also hide the loading spinner/notification (right side)
+    const loadingNotification = document.querySelector('.animate-fade-in');
+    
+    if (!mainWrapper) {
+      alert("לא נמצא אלמנט ראשי לייצוא");
       setIsDownloading(false);
       setShowNotification(false);
-      // Clean up styles
-      const addedStyle = document.head.querySelector("#custom-print-style");
-      if (addedStyle) {
-        addedStyle.remove();
+      return;
+    }
+    
+    // Hide button, notification, and loading spinner
+    if (button) button.style.display = 'none';
+    if (notification) notification.style.display = 'none';
+    if (loadingNotification) loadingNotification.style.display = 'none';
+    
+    // Configure dom-to-image options to remove borders and improve quality
+    const options = {
+      quality: 1.0,
+      width: mainWrapper.scrollWidth,
+      height: mainWrapper.scrollHeight,
+      style: {
+        'transform': 'scale(1)',
+        'transform-origin': 'top left',
+        'border': 'none',
+        'outline': 'none',
+        'box-shadow': 'none'
+      },
+      filter: function (node) {
+        // Remove any border styles from all elements
+        if (node.style) {
+          node.style.border = 'none';
+          node.style.outline = 'none';
+          node.style.boxShadow = 'none';
+        }
+        return true;
       }
-    }, 300);
+    };
+    
+    domtoimage.toSvg(mainWrapper, options)
+      .then(function (svgDataUrl) {
+        // Create a new image element to load the SVG
+        const img = new Image();
+        
+        img.onload = function() {
+          try {
+            // Get the image dimensions
+            const imgWidth = img.naturalWidth;
+            const imgHeight = img.naturalHeight;
+            
+            // A4 dimensions in mm
+            const a4Width = 210;
+            const a4Height = 297;
+            
+            // Calculate scale - prioritize width scaling and use a larger base scale
+            const scaleX = a4Width / (imgWidth * 0.264583); // Convert px to mm (96 DPI)
+            const scaleY = a4Height / (imgHeight * 0.264583);
+            
+            // Use scaleX (width-based) with a multiplier for increased scaling
+            // This will make the image larger without increasing height proportionally
+            const scale = scaleX * 5; // Increased scale factor
+            
+            // Calculate final dimensions
+            const finalWidth = imgWidth * 0.264583 * scale;
+            const finalHeight = imgHeight * 0.264583 * scale;
+            
+            // Center the image on the page horizontally, but keep it at the top
+            const offsetX = (a4Width - finalWidth) / 2;
+            const offsetY = 0; // Keep at top instead of centering vertically
+            
+            // Create PDF document with A4 size
+            const pdf = new jsPDF({
+              orientation: 'portrait',
+              unit: 'mm',
+              format: 'a4'
+            });
+            
+            // Convert SVG to PNG for better PDF compatibility
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size with high resolution for quality
+            const canvasScale = 4; // Increased scale for better quality
+            canvas.width = imgWidth * canvasScale;
+            canvas.height = imgHeight * canvasScale;
+            ctx.scale(canvasScale, canvasScale);
+            
+            // Set white background
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, imgWidth, imgHeight);
+            
+            // Draw the image on canvas
+            ctx.drawImage(img, 0, 0);
+            
+            // Convert canvas to PNG data URL
+            const pngDataUrl = canvas.toDataURL('image/png', 1.0);
+            
+            // Add the image to PDF with increased scale but constrained to page width
+            // If the scaled image is wider than A4, fit it to width
+            if (finalWidth > a4Width) {
+              const constrainedScale = a4Width / (imgWidth * 0.264583);
+              const constrainedHeight = imgHeight * 0.264583 * constrainedScale;
+              pdf.addImage(pngDataUrl, 'PNG', 0, offsetY, a4Width, constrainedHeight);
+            } else {
+              pdf.addImage(pngDataUrl, 'PNG', offsetX, offsetY, finalWidth, finalHeight);
+            }
+            
+            // Save the PDF
+            pdf.save('modus-media-fullsite.pdf');
+            
+            // Restore elements
+            if (button) button.style.display = '';
+            if (notification) notification.style.display = '';
+            if (loadingNotification) loadingNotification.style.display = '';
+            setIsDownloading(false);
+            setShowNotification(false);
+            
+          } catch (error) {
+            console.error('Error creating PDF:', error);
+            alert('שגיאה ביצירת PDF: ' + error.message);
+            
+            // Restore elements on error
+            if (button) button.style.display = '';
+            if (notification) notification.style.display = '';
+            if (loadingNotification) loadingNotification.style.display = '';
+            setIsDownloading(false);
+            setShowNotification(false);
+          }
+        };
+        
+        img.onerror = function() {
+          alert('שגיאה בטעינת התמונה עבור PDF');
+          
+          // Restore elements on error
+          if (button) button.style.display = '';
+          if (notification) notification.style.display = '';
+          if (loadingNotification) loadingNotification.style.display = '';
+          setIsDownloading(false);
+          setShowNotification(false);
+        };
+        
+        // Load the SVG data URL
+        img.src = svgDataUrl;
+      })
+      .catch(function (error) {
+        // Restore elements on error
+        if (button) button.style.display = '';
+        if (notification) notification.style.display = '';
+        if (loadingNotification) loadingNotification.style.display = '';
+        alert('שגיאה ביצוא SVG: ' + error);
+        setIsDownloading(false);
+        setShowNotification(false);
+      });
   };
 
   const package1Features = [
@@ -191,24 +317,13 @@ const TwoVIP = () => {
 
   return (
     <div className="min-h-screen p-8">
-      {/* Notification */}
-      {showNotification && (
-        <div className="fixed top-4 right-4 z-50 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-fade-in">
-          <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-          </svg>
-          מייצא PDF... אנא המתן
-        </div>
-      )}
-
-      {/* PDF Download Button */}
+      {/* Site PDF Download Button */}
       <div className="fixed top-4 left-4 z-50">
         <button
-          onClick={downloadPDF}
+          onClick={downloadSiteSVG}
           disabled={isDownloading}
           className={`
-            flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-white shadow-lg
+            flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-white shadow-lg site-export-btn
             transition-all duration-200 hover:shadow-xl
             ${
               isDownloading
@@ -235,18 +350,45 @@ const TwoVIP = () => {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              מדפיס...
+              מייצא PDF...
             </>
           ) : (
             <>
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
               </svg>
-              הדפס כ-PDF
+              הורד PDF של האתר
             </>
           )}
         </button>
       </div>
+
+      {/* Download Notification */}
+      {showNotification && (
+        <div className="fixed top-4 right-4 z-50 site-export-notification animate-fade-in">
+          <div className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg">
+            <div className="flex items-center gap-2">
+              <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  fill="none"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              מייצא PDF...
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Main content wrapped in PDF-content div */}
       <div id="pdf-content">

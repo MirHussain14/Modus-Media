@@ -43,7 +43,7 @@ const BundleServicesCard = ({
     <div className="bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl p-8 text-right flex flex-col relative">
       <h1
         dir="rtl"
-        className="text-center font-semibold text-4xl w-[80%] mx-auto text-[#0c1d50] mb-2 leading-snug"
+        className="text-center font-bold text-4xl w-[80%] mx-auto text-[#0c1d50] mb-2 leading-snug"
       >
         מדוע עסקים בוחרים <br />
         במודוס <span className="font-light">מדיה</span>

@@ -158,7 +158,7 @@ const TwoWith = () => {
   }
 
   return (
-    <div className="min-h-screen p-8 lg: ">
+    <div className="min-h-screen p-8 lg: font-outfit">
       {/* Notification */}
       {showNotification && (
         <div className="fixed top-4 right-4 z-50 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-fade-in">

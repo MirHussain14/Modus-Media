@@ -82,7 +82,7 @@ const Header = () => {
               <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium">039521528</span>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
-              <img className="w-4 h-4" src="/mail.png" alt="" />
+              <img className="w-4 h-3" src="/mail.png" alt="" />
               <span className="text-sm sm:text-base md:text-lg lg:text-xl font-medium">sales@modusmedia.io</span>
             </div>
             <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">

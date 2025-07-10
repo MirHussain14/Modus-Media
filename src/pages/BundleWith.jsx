@@ -17,7 +17,6 @@ const BundleWith = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,35 +36,31 @@ const BundleWith = () => {
     fetchData();
   }, []);
 
-  // Export the complete website as PDF using dom-to-image, hiding buttons/notifications
+  // Export the complete website as PDF using dom-to-image, hiding buttons
   const downloadSiteSVG = () => {
     setIsDownloading(true);
-    setShowNotification(true);
+    
+    // Show alert instead of notification
+    alert("מתחיל ייצוא PDF... אנא המתן");
     
     // Select the main wrapper (the outermost div with min-h-screen p-8)
     const mainWrapper = document.querySelector('.min-h-screen.p-8');
     const button = document.querySelector('.site-export-btn');
-    const notification = document.querySelector('.site-export-notification');
-    // Also hide the loading spinner/notification (right side)
-    const loadingNotification = document.querySelector('.animate-fade-in');
     
     if (!mainWrapper) {
       alert("לא נמצא אלמנט ראשי לייצוא");
       setIsDownloading(false);
-      setShowNotification(false);
       return;
     }
     
-    // Hide button, notification, and loading spinner
+    // Hide button during export
     if (button) button.style.display = 'none';
-    if (notification) notification.style.display = 'none';
-    if (loadingNotification) loadingNotification.style.display = 'none';
     
     // Configure dom-to-image options to remove borders and improve quality
     const options = {
       quality: 1.0,
       width: mainWrapper.scrollWidth,
-      height: mainWrapper.scrollHeight*1.2,
+      height: mainWrapper.scrollHeight * 1.2,
       style: {
         'transform': 'scale(1.25)',
         'transform-origin': 'center top',
@@ -104,11 +99,10 @@ const BundleWith = () => {
             const finalHeight = imgHeight * 0.264583 * scaleX;
 
             // Create PDF document with custom height to fit the entire content
-            // Use the calculated height instead of standard A4 height
             const pdf = new jsPDF({
               orientation: 'portrait',
               unit: 'mm',
-              format: [a4Width, finalHeight*1.05] // Custom format: [width, height]
+              format: [a4Width, finalHeight * 1.05] // Custom format: [width, height]
             });
 
             // Convert SVG to PNG for better PDF compatibility
@@ -137,12 +131,12 @@ const BundleWith = () => {
             // Save the PDF
             pdf.save('modus-media-bundle.pdf');
 
+            // Show success alert
+            alert("PDF נוצר בהצלחה!");
+
             // Restore elements
             if (button) button.style.display = '';
-            if (notification) notification.style.display = '';
-            if (loadingNotification) loadingNotification.style.display = '';
             setIsDownloading(false);
-            setShowNotification(false);
 
           } catch (error) {
             console.error('Error creating PDF:', error);
@@ -150,10 +144,7 @@ const BundleWith = () => {
 
             // Restore elements on error
             if (button) button.style.display = '';
-            if (notification) notification.style.display = '';
-            if (loadingNotification) loadingNotification.style.display = '';
             setIsDownloading(false);
-            setShowNotification(false);
           }
         };
 
@@ -162,10 +153,7 @@ const BundleWith = () => {
 
           // Restore elements on error
           if (button) button.style.display = '';
-          if (notification) notification.style.display = '';
-          if (loadingNotification) loadingNotification.style.display = '';
           setIsDownloading(false);
-          setShowNotification(false);
         };
 
         // Load the SVG data URL
@@ -174,11 +162,8 @@ const BundleWith = () => {
       .catch(function (error) {
         // Restore elements on error
         if (button) button.style.display = '';
-        if (notification) notification.style.display = '';
-        if (loadingNotification) loadingNotification.style.display = '';
         alert('שגיאה ביצוא SVG: ' + error);
         setIsDownloading(false);
-        setShowNotification(false);
       });
   };
 
@@ -317,17 +302,6 @@ const BundleWith = () => {
 
   return (
     <div className="min-h-screen p-8">
-      {/* Notification */}
-      {showNotification && (
-        <div className="fixed top-4 right-4 z-50 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-2 animate-fade-in site-export-notification">
-          <svg className="animate-spin h-5 w-5 mr-2" viewBox="0 0 24 24">
-            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-          </svg>
-          מייצא PDF... אנא המתן
-        </div>
-      )}
-
       {/* Site PDF Download Button */}
       <div className="fixed top-4 left-4 z-50">
         <button

@@ -57,9 +57,9 @@ const Video = () => {
     const options = {
       quality: 1.0,
       width: mainWrapper.scrollWidth,
-      height: mainWrapper.scrollHeight * 1.25,
+      height: mainWrapper.scrollHeight * 1.3,
       style: {
-        'transform': 'scale(1.3)',
+        'transform': 'scale(1.32)',
         'transform-origin': 'center top',
         'border': 'none',
         'outline': 'none',

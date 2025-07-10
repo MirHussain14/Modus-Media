@@ -6,7 +6,7 @@ const PricingCard = ({ title, number, features, mondayData }) => {
     if (mondayData[0].column_values[0].text) {
       const priceText = mondayData[0].column_values[0].text;
       console.log("Price Text:", priceText);
-      return mondayData[0].column_values[0].text || '170'; // Fallback to 170 if no value is found
+      return mondayData[0].column_values[0].text || "170"; // Fallback to 170 if no value is found
     }
   };
 
@@ -31,12 +31,18 @@ const PricingCard = ({ title, number, features, mondayData }) => {
         <div className="mb-10">
           <div className="text-apna text-4xl mb-2">{title}</div>
           <div className="flex justify-end space-x-2 items-center">
-            <div className="bg-apna text-white rounded-2xl px-5 py-2 text-3xl md:text-5xl flex items-center justify-center font-outfit">
+            <div
+              className={`bg-apna text-white rounded-2xl ${
+                number == 1 ? "px-6" : "px-5"
+              } py-2 text-3xl md:text-5xl flex items-center justify-center font-outfit`}
+            >
               {number}
             </div>
             <span className="text-6xl outfit-light text-dark">media</span>
           </div>
-          <div dir="rtl" className="text-lg text-gray-500 mt-1">החבילה כוללת:</div>
+          <div dir="rtl" className="text-lg text-gray-500 mt-1">
+            החבילה כוללת:
+          </div>
         </div>
 
         <div className="space-y-8">
@@ -48,13 +54,15 @@ const PricingCard = ({ title, number, features, mondayData }) => {
 
       <div className="flex justify-between md:gap-0 w-full ps-3 ms-auto items-center mt-20">
         <div className="right">
-            <p className="text-sm md:text-md text-blue-900">+ מע"מ</p>
-            <p className="text-sm md:text-md text-gray-500">לחודש</p>
-            <p className="text-sm md:text-md text-gray-500">{quantityText}</p>
+          <p className="text-sm md:text-md text-blue-900">+ מע"מ</p>
+          <p className="text-sm md:text-md text-gray-500">לחודש</p>
+          <p className="text-sm md:text-md text-gray-500">{quantityText}</p>
         </div>
         <div className="text-left">
           <span className="text-3xl md:text-5xl text-gray-600 mr-2">₪</span>
-          <span className="text-5xl md:text-7xl font-bold text-apna">{displayPrice}</span>
+          <span className="text-5xl md:text-7xl font-bold text-apna">
+            {displayPrice}
+          </span>
         </div>
       </div>
     </div>

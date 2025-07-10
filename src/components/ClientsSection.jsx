@@ -3,7 +3,7 @@ import React from 'react';
 const ClientsSection = () => {
   return (
     <div className="py-8 sm:py-12 md:py-16 bg-white">
-      <div className="max-w-6xl mx-auto px-4">
+      <div className="max-w-3xl mx-auto px-4">
         <div className="text-center mb-6 sm:mb-8 md:mb-12">
           <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-800 mb-2">בין לקוחותינו</h2>
         </div>

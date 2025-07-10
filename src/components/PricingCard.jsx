@@ -31,7 +31,7 @@ const PricingCard = ({ title, number, features, mondayData }) => {
         <div className="mb-10">
           <div className="text-apna text-4xl mb-2">{title}</div>
           <div className="flex justify-end space-x-2 items-center">
-            <div className="bg-apna text-white rounded-2xl px-6 py-2 text-3xl md:text-5xl flex items-center justify-center font-outfit">
+            <div className="bg-apna text-white rounded-2xl px-5 py-2 text-3xl md:text-5xl flex items-center justify-center font-outfit">
               {number}
             </div>
             <span className="text-6xl outfit-light text-dark">media</span>

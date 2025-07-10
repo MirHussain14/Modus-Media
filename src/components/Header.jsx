@@ -50,7 +50,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div dir="ltr" className="relative bg-[#0c1d50] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-7 pe-6 md:pe-10 lg:pe-60 rounded-2xl sm:rounded-3xl md:rounded-4xl flex w-full md:max-w-[1000.97px] max-h-[435.84px] mx-auto">
+    <div dir="ltr" className="relative bg-[#0B225F] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-7 pe-6 md:pe-10 lg:pe-60 rounded-2xl sm:rounded-3xl md:rounded-4xl flex w-full md:max-w-[1000.97px] max-h-[435.84px] mx-auto">
       {/* Vertical Label */}
       <div className="absolute -top-[7%] right-3 md:right-10 h-full">
         <div className="bg-apna h-[115%] w-20 sm:w-24 md:w-28 lg:w-36 rounded-md sm:rounded-lg flex items-center justify-center">

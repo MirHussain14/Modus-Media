@@ -88,7 +88,7 @@ const OneWithout = () => {
             const imgHeight = img.naturalHeight;
 
             // A4 dimensions in mm
-            const a4Width = 210;
+            const a4Width = 220;
 
             // Calculate scale to fit the image exactly to the A4 width
             const scaleX = a4Width / (imgWidth * 0.264583); // px to mm (96 DPI)

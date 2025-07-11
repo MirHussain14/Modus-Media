@@ -23,7 +23,7 @@ const ClientsSection = () => {
             <img src="/Aristo Smat logo 1.png" alt="Aristo Smal" className="max-h-full max-w-full object-contain" />
           </div>
           <div className="flex items-center justify-center w-12 h-10 sm:w-16 sm:h-12 md:w-20 md:h-14 lg:w-24 lg:h-16">
-            <img src="/Group 212.png" alt="Factory 54" className="max-h-full max-w-full object-contain" />
+            <img src="/Group 212.png" alt="ILAN" className="max-h-full max-w-full object-contain" />
           </div>
           <div className="flex items-center justify-center w-12 h-10 sm:w-16 sm:h-12 md:w-20 md:h-14 lg:w-24 lg:h-16">
             <img src="/Femina 1.png" alt="Femina" className="max-h-full max-w-full object-contain" />

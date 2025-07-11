@@ -62,7 +62,7 @@ const TwoVIP = () => {
     const options = {
       quality: 1.0,
       width: mainWrapper.scrollWidth,
-      height: mainWrapper.scrollHeight*1.3,
+      height: mainWrapper.scrollHeight*1.2,
       style: {
         'transform': 'scale(1.2)',
         'transform-origin': 'center top',

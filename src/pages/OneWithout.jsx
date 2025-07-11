@@ -59,7 +59,7 @@ const OneWithout = () => {
       width: mainWrapper.scrollWidth,
       height: mainWrapper.scrollHeight * 1.3,
       style: {
-        'transform': 'scale(1.32)',
+        'transform': 'scale(1.2)',
         'transform-origin': 'center top',
         'border': 'none',
         'outline': 'none',
@@ -88,7 +88,7 @@ const OneWithout = () => {
             const imgHeight = img.naturalHeight;
 
             // A4 dimensions in mm
-            const a4Width = 220;
+            const a4Width = 210;
 
             // Calculate scale to fit the image exactly to the A4 width
             const scaleX = a4Width / (imgWidth * 0.264583); // px to mm (96 DPI)
@@ -107,7 +107,7 @@ const OneWithout = () => {
             const ctx = canvas.getContext('2d');
 
             // Set canvas size with high resolution for quality
-            const canvasScale = 4; // Increased scale for better quality
+            const canvasScale = 2; // Increased scale for better quality
             canvas.width = imgWidth * canvasScale;
             canvas.height = imgHeight * canvasScale;
             ctx.scale(canvasScale, canvasScale);

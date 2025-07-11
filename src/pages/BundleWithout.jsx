@@ -61,7 +61,7 @@ const BundleWithout = () => {
       width: mainWrapper.scrollWidth,
       height: mainWrapper.scrollHeight * 1.3,
       style: {
-        'transform': 'scale(1.32)',
+        'transform': 'scale(1.2)',
         'transform-origin': 'center top',
         'border': 'none',
         'outline': 'none',

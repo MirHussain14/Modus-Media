@@ -9,6 +9,9 @@ import Vbdeo from "./pages/Vbdeo";
 import Video from "./pages/Video";
 import BundleWith from './pages/BundleWith';
 import OneWith from './pages/OneWith';
+import BundleWithPDF from './pdf/pages/BundleWithPDF';
+import BundleWithoutPDF from './pdf/pages/BundleWithoutPDF';
+
 
 const App = () => {
   return (

@@ -8,6 +8,7 @@ import { getItemWithParentBoardRelation } from "../monday";
 import FooterMobile from "../components/FooterMobile";
 import domtoimage from "dom-to-image";
 import { jsPDF } from 'jspdf';
+import TwoVIPPDF from "../pdf/pages/TwoVIPPDF";
 
 const TwoVIP = () => {
   const [mondayData, setMondayData] = useState(null);
@@ -35,147 +36,106 @@ const TwoVIP = () => {
   }, []);
 
   // Export the complete website as PDF using dom-to-image, hiding buttons/notifications
-  const downloadSiteSVG = () => {
+  const downloadSiteSVG = (className = "") => {
     setIsDownloading(true);
-    setShowNotification(true);
-    
-    // Select the main wrapper (the outermost div with min-h-screen p-8)
-    const mainWrapper = document.querySelector('.min-h-screen.p-8');
-    const button = document.querySelector('.site-export-btn');
-    const notification = document.querySelector('.site-export-notification');
-    // Also hide the loading spinner/notification (right side)
-    const loadingNotification = document.querySelector('.animate-fade-in');
-    
+    alert("מתחיל ייצוא PDF... אנא המתן");
+    const mainWrapper = document.querySelector(`.${className}`);
+    console.log("Main Wrapper", mainWrapper);
+    const button = document.querySelector(".site-export-btn");
     if (!mainWrapper) {
       alert("לא נמצא אלמנט ראשי לייצוא");
       setIsDownloading(false);
-      setShowNotification(false);
       return;
     }
-    
-    // Hide button, notification, and loading spinner
-    if (button) button.style.display = 'none';
-    if (notification) notification.style.display = 'none';
-    if (loadingNotification) loadingNotification.style.display = 'none';
-    
-    // Configure dom-to-image options to remove borders and improve quality
+
+    if (button) button.style.display = "none";
+
+    // Check if screen is mobile (width <= 768px)
+    const isMobile = window.innerWidth <= 768;
+    const scale = isMobile ? 0.95 : 1.4;
+    const heightMultiplier = isMobile ? 0.95 : 1.4;
+
     const options = {
-      quality: 1.0,
+      quality: 1,
       width: mainWrapper.scrollWidth,
-      height: mainWrapper.scrollHeight*1.2,
+      height: mainWrapper.scrollHeight,
       style: {
-        'transform': 'scale(1.2)',
-        'transform-origin': 'center top',
-        'border': 'none',
-        'outline': 'none',
-        'box-shadow': 'none'
+        transform: `scale(1)`,
+        "transform-origin": "top center",
+        "box-shadow": "none",
+        "opacity":"100%",
+        "display":"block",
+        "top":"none",
+        "left":"none"
       },
       filter: function (node) {
-        // Remove any border styles from all elements
         if (node.style) {
-          node.style.border = 'none';
-          node.style.outline = 'none';
-          node.style.boxShadow = 'none';
+          node.style.border = "none";
+          node.style.outline = "none";
+          node.style.boxShadow = "none";
         }
         return true;
-      }
+      },
     };
-    
-    domtoimage.toSvg(mainWrapper, options)
+
+    domtoimage
+      .toSvg(mainWrapper, options)
       .then(function (svgDataUrl) {
-        // Create a new image element to load the SVG
         const img = new Image();
 
-        img.onload = function() {
+        img.onload = function () {
           try {
-            // Get the image dimensions
             const imgWidth = img.naturalWidth;
             const imgHeight = img.naturalHeight;
-
-            // A4 dimensions in mm
             const a4Width = 210;
-
-            // Calculate scale to fit the image exactly to the A4 width
-            const scaleX = a4Width / (imgWidth * 0.264583); // px to mm (96 DPI)
+            const scaleX = a4Width / (imgWidth * 0.264583);
             const finalWidth = a4Width;
             const finalHeight = imgHeight * 0.264583 * scaleX;
 
-            // Create PDF document with custom height to fit the entire content
-            // Use the calculated height instead of standard A4 height
             const pdf = new jsPDF({
-              orientation: 'portrait',
-              unit: 'mm',
-              format: [a4Width, finalHeight*1.05] // Custom format: [width, height]
+              orientation: "portrait",
+              unit: "mm",
+              format: [a4Width, finalHeight],
             });
 
-            // Convert SVG to PNG for better PDF compatibility
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            // Set canvas size with high resolution for quality
-            const canvasScale = 4; // Increased scale for better quality
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            const canvasScale = 2;
             canvas.width = imgWidth * canvasScale;
             canvas.height = imgHeight * canvasScale;
             ctx.scale(canvasScale, canvasScale);
 
-            // Set white background
-            ctx.fillStyle = 'white';
+            ctx.fillStyle = "white";
             ctx.fillRect(0, 0, imgWidth, imgHeight);
-
-            // Draw the image on canvas
             ctx.drawImage(img, 0, 0);
 
-            // Convert canvas to PNG data URL
-            const pngDataUrl = canvas.toDataURL('image/png', 1.0);
+            const pngDataUrl = canvas.toDataURL("image/png", 1.0);
+            pdf.addImage(pngDataUrl, "PNG", 0, 0, finalWidth, finalHeight);
+            pdf.save("modus-media-bundle-without.pdf");
 
-            // Add the image to PDF - it will now fit perfectly without cropping
-            pdf.addImage(pngDataUrl, 'PNG', 0, 0, finalWidth, finalHeight);
-
-            // Save the PDF
-            pdf.save('modus-media-fullsite.pdf');
-
-            // Restore elements
-            if (button) button.style.display = '';
-            if (notification) notification.style.display = '';
-            if (loadingNotification) loadingNotification.style.display = '';
+            alert("PDF נוצר בהצלחה!");
+            if (button) button.style.display = "";
             setIsDownloading(false);
-            setShowNotification(false);
-
           } catch (error) {
-            console.error('Error creating PDF:', error);
-            alert('שגיאה ביצירת PDF: ' + error.message);
-
-            // Restore elements on error
-            if (button) button.style.display = '';
-            if (notification) notification.style.display = '';
-            if (loadingNotification) loadingNotification.style.display = '';
+            console.error("Error creating PDF:", error);
+            alert("שגיאה ביצירת PDF: " + error.message);
+            if (button) button.style.display = "";
             setIsDownloading(false);
-            setShowNotification(false);
           }
         };
 
-        img.onerror = function() {
-          alert('שגיאה בטעינת התמונה עבור PDF');
-
-          // Restore elements on error
-          if (button) button.style.display = '';
-          if (notification) notification.style.display = '';
-          if (loadingNotification) loadingNotification.style.display = '';
+        img.onerror = function () {
+          alert("שגיאה בטעינת התמונה עבור PDF");
+          if (button) button.style.display = "";
           setIsDownloading(false);
-          setShowNotification(false);
         };
 
-        // Load the SVG data URL
         img.src = svgDataUrl;
       })
       .catch(function (error) {
-        // Restore elements on error
-        if (button) button.style.display = '';
-        if (notification) notification.style.display = '';
-        if (loadingNotification) loadingNotification.style.display = '';
-        alert('שגיאה ביצוא SVG: ' + error);
+        if (button) button.style.display = "";
+        alert("שגיאה ביצוא SVG: " + error);
         setIsDownloading(false);
-        setShowNotification(false);
       });
   };
 
@@ -302,7 +262,7 @@ const TwoVIP = () => {
       {/* Site PDF Download Button */}
       <div className="fixed top-4 left-4 z-50">
         <button
-          onClick={downloadSiteSVG}
+          onClick={() => downloadSiteSVG("twovip")}
           disabled={isDownloading}
           className={`
             flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-white shadow-lg site-export-btn
@@ -370,7 +330,7 @@ const TwoVIP = () => {
         <ClientsSection />
         <Footer />
       </div>
-
+      <TwoVIPPDF/>
       <FooterMobile />
     </div>
   );

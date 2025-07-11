@@ -56,11 +56,11 @@ const Header = () => {
       {/* Left Side */}
       <div className="flex w-full flex-col md:flex-row items-start justify-between font-outfit">
         <div className="flex flex-col space-y-1 h-full justify-between">
-          <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 mb-2 sm:mb-3 md:mb-4">
+          <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4 mb-2 sm:mb-3 md:mb-4 w-full">
             <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-9 md:h-9 rounded flex items-center justify-center">
               <img src="/Group.svg" alt="" />
             </div>
-            <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-light w-full">
+            <span className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl font-light w-full whitespace-nowrap inline-flex gap-2">
               modus <span className="opacity-[80%]">media</span>
             </span>
           </div>

@@ -50,7 +50,7 @@ const FooterMobile = () => {
   }, []);
 
   return (
-    <div dir="ltr" className="relative bg-[#0c1d50] text-white px-5 sm:px-6 md:px-8 py-4 rounded-2xl sm:rounded-3xl md:rounded-4xl flex w-full md:max-w-[1000.97px] max-h-[435.84px] mx-auto md:hidden">
+    <div dir="ltr" className="relative bg-[#0c1d50] text-white px-5 sm:px-6 md:px-8 py-4 rounded-2xl sm:rounded-3xl md:rounded-4xl flex w-full md:max-w-[1000.97px] max-h-[435.84px] mx-auto md:hidden mt-4">
 
       {/* Left Side */}
       <div className="flex w-full flex-col lg:flex-row items-start justify-between">

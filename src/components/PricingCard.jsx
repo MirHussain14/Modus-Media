@@ -33,8 +33,8 @@ const PricingCard = ({ title, number, features, mondayData }) => {
           <div className="flex justify-end space-x-2">
             <div
               className={`bg-apna text-white rounded-2xl ${
-                number == 1 ? "px-6" : "px-5"
-              } md:py-2 py-2 text-3xl md:text-5xl flex items-center justify-center font-outfit`}
+                number == 1 ? "px-6" : "md:px-5"
+              } md:py-2 py-3 px-5 text-3xl md:text-5xl flex items-center justify-center font-outfit mt-1`}
             >
               {number}
             </div>

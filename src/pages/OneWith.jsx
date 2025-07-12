@@ -223,7 +223,7 @@ const OneWith = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen p-8 lg: ">
+      <div className="min-h-screen p-8 w-screen overflow-x-hidden relative">
         <Header />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">

@@ -42,8 +42,8 @@ const Header = () => {
       {/* Vertical Label */}
       <div className="absolute -top-[7%] right-3 md:right-10 h-full">
         <div className="bg-apna h-[115%] w-20 sm:w-24 md:w-28 lg:w-36 rounded-md sm:rounded-lg flex items-center justify-center">
-          <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute -left-[8%] top-[2.7%] -z-1 rotate-[41deg] md:rotate-45"></div>
-          <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute md:-left-[8%] -left-[7%] -bottom-[12%] md:-bottom-[12.5%] -z-1 rotate-[55deg] md:rotate-45"></div>
+          <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute -left-[8%] top-[2.6%] -z-1 rotate-[41deg] md:rotate-[40deg]"></div>
+          <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute md:-left-[8%] -left-[7%] -bottom-[12%] md:-bottom-[12.3%] -z-1 rotate-[55deg] md:rotate-[50deg]"></div>
           <span
             className="text-white text-2xl sm:text-2xl md:text-[55px] font-bold transform rotate-180 ps-20 md:ps-0"
             style={{ writingMode: "vertical-rl" }}
@@ -60,7 +60,7 @@ const Header = () => {
             <div className="w-5 h-5 sm:w-6 sm:h-6 md:w-9 md:h-9 rounded flex items-center justify-center">
               <img src="/Group.svg" alt="" />
             </div>
-            <span className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl font-light w-full whitespace-nowrap inline-flex gap-2">
+            <span className="text-lg sm:text-xl md:text-2xl lg:text-2xl xl:text-4xl font-light w-full whitespace-nowrap">
               modus <span className="opacity-[80%]">media</span>
             </span>
           </div>

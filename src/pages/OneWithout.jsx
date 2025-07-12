@@ -234,7 +234,7 @@ const OneWithout = () => {
   }
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen p-8 w-screen overflow-x-hidden relative">
       {/* Site PDF Download Button */}
       <div className="fixed top-4 left-4 z-50">
         <button

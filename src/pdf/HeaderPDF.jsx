@@ -44,7 +44,7 @@ const HeaderPDF = () => {
           <div className="bg-[#024B94] h-8 w-8 absolute -left-[8%] top-[2.7%] -z-1 rotate-45"></div>
           <div className="bg-[#024B94] h-8 w-8 absolute -left-[8%] -bottom-[12.5%] -z-1 rotate-45"></div>
           <span
-            className="text-white text-[55px] font-bold transform rotate-180 ps-0"
+            className="text-white text-[50px] font-bold transform rotate-180 ps-0"
             style={{ writingMode: "vertical-rl" }}
           >
             מודוס <span className="font-light">מדיה</span>

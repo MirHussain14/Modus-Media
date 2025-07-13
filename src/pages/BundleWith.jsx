@@ -6,9 +6,17 @@ import { getItemWithParentBoardRelation } from "../monday";
 import BundlePricing from "../components/BundlePricing";
 import BundleServicesCard from "../components/BundleServices";
 import FooterMobile from "../components/FooterMobile";
+
 import domtoimage from "dom-to-image";
 import { jsPDF } from "jspdf";
 import BundleWithPDF from "../pdf/pages/BundleWithPDF";
+import { uploadAndLinkToMonday } from "../dropbox";
+
+// Helper to get query param by name
+function getQueryParam(name) {
+  const params = new URLSearchParams(window.location.search);
+  return params.get(name);
+}
 
 const BundleWith = () => {
   const [mondayData, setMondayData] = useState(null);
@@ -16,8 +24,9 @@ const BundleWith = () => {
   const [error, setError] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
 
+  const [pdfFile, setPdfFile] = useState(null);
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchDataAndGeneratePDF = async () => {
       try {
         const response = await getItemWithParentBoardRelation();
         if (response && response.length > 0) {
@@ -29,113 +38,104 @@ const BundleWith = () => {
       } finally {
         setLoading(false);
       }
-    };
 
-    fetchData();
-  }, []);
-
-  // Export only the element with a specific class as PDF using dom-to-image
-  const downloadSiteSVG = (className = "") => {
-    setIsDownloading(true);
-    alert("מתחיל ייצוא PDF... אנא המתן");
-    const mainWrapper = document.querySelector(`.${className}`);
-    console.log("Main Wrapper", mainWrapper);
-    const button = document.querySelector(".site-export-btn");
-    if (!mainWrapper) {
-      alert("לא נמצא אלמנט ראשי לייצוא");
-      setIsDownloading(false);
-      return;
-    }
-
-    if (button) button.style.display = "none";
-
-    // Check if screen is mobile (width <= 768px)
-    const isMobile = window.innerWidth <= 768;
-    const scale = isMobile ? 0.95 : 1.4;
-    const heightMultiplier = isMobile ? 0.95 : 1.4;
-
-    const options = {
-      quality: 1,
-      width: mainWrapper.scrollWidth,
-      height: mainWrapper.scrollHeight,
-      style: {
-        transform: `scale(1)`,
-        "transform-origin": "top center",
-        "box-shadow": "none",
-        "opacity":"100%",
-        "display":"block",
-        "top":"none",
-        "left":"none"
-      },
-      filter: function (node) {
-        if (node.style) {
-          node.style.border = "none";
-          node.style.outline = "none";
-          node.style.boxShadow = "none";
-        }
-        return true;
-      },
-    };
-
-    domtoimage
-      .toSvg(mainWrapper, options)
-      .then(function (svgDataUrl) {
-        const img = new Image();
-
-        img.onload = function () {
-          try {
+      // Wait for DOM to render
+      setTimeout(async () => {
+        try {
+          const mainWrapper = document.querySelector('.bundlewith');
+          if (!mainWrapper) return;
+          const options = {
+            quality: 1,
+            width: mainWrapper.scrollWidth,
+            height: mainWrapper.scrollHeight,
+            style: {
+              transform: `scale(1)`,
+              "transform-origin": "top center",
+              "box-shadow": "none",
+              "opacity": "100%",
+              "display": "block",
+              "top": "none",
+              "left": "none"
+            },
+            filter: function (node) {
+              if (node.style) {
+                node.style.border = "none";
+                node.style.outline = "none";
+                node.style.boxShadow = "none";
+              }
+              return true;
+            },
+          };
+          const svgDataUrl = await domtoimage.toSvg(mainWrapper, options);
+          const img = new window.Image();
+          img.src = svgDataUrl;
+          img.onload = async function () {
             const imgWidth = img.naturalWidth;
             const imgHeight = img.naturalHeight;
             const a4Width = 210;
             const scaleX = a4Width / (imgWidth * 0.264583);
             const finalWidth = a4Width;
             const finalHeight = imgHeight * 0.264583 * scaleX;
-
             const pdf = new jsPDF({
               orientation: "portrait",
               unit: "mm",
               format: [a4Width, finalHeight],
             });
-
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
             const canvasScale = 2;
             canvas.width = imgWidth * canvasScale;
             canvas.height = imgHeight * canvasScale;
             ctx.scale(canvasScale, canvasScale);
-
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, imgWidth, imgHeight);
             ctx.drawImage(img, 0, 0);
-
             const pngDataUrl = canvas.toDataURL("image/png", 1.0);
             pdf.addImage(pngDataUrl, "PNG", 0, 0, finalWidth, finalHeight);
-            pdf.save("modus-media-bundle-without.pdf");
+            const pdfBlob = pdf.output("blob");
+            // Generate unique file name using timestamp
+            const timestamp = Date.now();
+            const fileName = `modus-media-bundle-with-${timestamp}.pdf`;
+            const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+            setPdfFile(file);
+            // Get mondayItemId from query param (?id=)
+            const mondayItemId = getQueryParam("id") || 9542442798;
+            // Dynamic Dropbox path
+            const dropboxTargetPath = `/Upload Testing/${fileName}`;
+            // Upload to Dropbox
+            await uploadAndLinkToMonday(file, dropboxTargetPath, mondayItemId);
+          };
+        } catch (err) {
+          // Ignore errors in PDF upload for now
+        }
+      }, 2000);
+    };
+    fetchDataAndGeneratePDF();
+  }, []);
 
-            alert("PDF נוצר בהצלחה!");
-            if (button) button.style.display = "";
-            setIsDownloading(false);
-          } catch (error) {
-            console.error("Error creating PDF:", error);
-            alert("שגיאה ביצירת PDF: " + error.message);
-            if (button) button.style.display = "";
-            setIsDownloading(false);
-          }
-        };
-
-        img.onerror = function () {
-          alert("שגיאה בטעינת התמונה עבור PDF");
-          if (button) button.style.display = "";
-          setIsDownloading(false);
-        };
-
-        img.src = svgDataUrl;
-      })
-      .catch(function (error) {
-        if (button) button.style.display = "";
-        alert("שגיאה ביצוא SVG: " + error);
-        setIsDownloading(false);
-      });
+  // Download the already generated PDF file from state
+  const downloadSiteSVG = () => {
+    if (!pdfFile) return;
+    setIsDownloading(true);
+    const button = document.querySelector(".site-export-btn");
+    if (button) {
+      button.classList.add("bg-green-600");
+    }
+    // Create a download link and trigger it
+    const url = URL.createObjectURL(pdfFile);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = pdfFile.name || "modus-media.pdf";
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+      if (button) {
+        button.classList.remove("bg-green-600");
+      }
+      setIsDownloading(false);
+    }, 1200);
   };
 
   const package1Features = [
@@ -276,14 +276,14 @@ const BundleWith = () => {
       {/* Site PDF Download Button */}
       <div className="fixed top-4 left-4 z-50">
         <button
-          onClick={() => downloadSiteSVG("bundlewith")}
-          disabled={isDownloading}
+          onClick={downloadSiteSVG}
+          disabled={isDownloading || !pdfFile}
           className={`
             flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-white shadow-lg site-export-btn
             transition-all duration-200 hover:shadow-xl
             ${
               isDownloading
-                ? "bg-gray-400 cursor-not-allowed"
+                ? "bg-green-600 cursor-not-allowed"
                 : "bg-blue-600 hover:bg-blue-700 active:bg-blue-800"
             }
           `}

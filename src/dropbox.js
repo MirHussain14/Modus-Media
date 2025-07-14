@@ -10,8 +10,8 @@ monday.setToken(
 
 // Dropbox SDK setup
 const dbx = new Dropbox({
-  clientId: "dn1fonf385f2hv4",
-  clientSecret: "o65a046lmb7atu7",
+  clientId: "	8li2m6ylm3opvzg",
+  clientSecret: "10o9f1omqxixwj7",
 });
 
 
@@ -27,7 +27,7 @@ export async function uploadAndLinkToMonday(
   try {
     // Step 1: Refresh Dropbox token
     dbx.auth.setRefreshToken(
-      "k8Qx88vKZIoAAAAAAAAAAXAYz3aXdLQwSsk3y9UeemcPOXbKJu2WnE7gfiFf8bnF"
+      "8y6mdvGrluIAAAAAAAAAAZJBUyEtlksV35MfsBitzrMyk1sh1k40-feIusmYNdmH"
     );
     await dbx.auth.refreshAccessToken();
     console.log("✅ Dropbox Access Token Refreshed");

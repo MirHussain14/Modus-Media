@@ -42,7 +42,7 @@ const BundleWith = () => {
       // Wait for DOM to render
       setTimeout(async () => {
         try {
-          const mainWrapper = document.querySelector('.bundlewith');
+          const mainWrapper = document.querySelector(".bundlewith");
           if (!mainWrapper) return;
           const options = {
             quality: 1,
@@ -52,10 +52,10 @@ const BundleWith = () => {
               transform: `scale(1)`,
               "transform-origin": "top center",
               "box-shadow": "none",
-              "opacity": "100%",
-              "display": "block",
-              "top": "none",
-              "left": "none"
+              opacity: "100%",
+              display: "block",
+              top: "none",
+              left: "none",
             },
             filter: function (node) {
               if (node.style) {
@@ -93,22 +93,35 @@ const BundleWith = () => {
             const pngDataUrl = canvas.toDataURL("image/png", 1.0);
             pdf.addImage(pngDataUrl, "PNG", 0, 0, finalWidth, finalHeight);
             const pdfBlob = pdf.output("blob");
-            // Generate unique file name using timestamp
-            const timestamp = Date.now();
-            const fileName = `modus-media-bundle-with-${timestamp}.pdf`;
-            const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+            // Get subitem name for filename
+            let subitemName = "";
+            if (mondayData && mondayData.length > 0) {
+              const item = mondayData[0];
+              if (item.name) subitemName = item.name;
+            }
+            // Format date as DD.MM.YYYY
+            const d = new Date();
+            const day = String(d.getDate()).padStart(2, "0");
+            const month = String(d.getMonth() + 1).padStart(2, "0");
+            const year = d.getFullYear();
+            const dateStr = `${day}.${month}.${year}`;
+            // File name in English
+            const fileName = `Modus Media - Proposal - ${subitemName} ${dateStr}.pdf`;
+            const file = new File([pdfBlob], fileName, {
+              type: "application/pdf",
+            });
             setPdfFile(file);
             // Get mondayItemId from query param (?id=)
             const mondayItemId = getQueryParam("id") || 9542442798;
-            // Dynamic Dropbox path
-            const dropboxTargetPath = `/Upload Testing/${fileName}`;
+            // Dropbox path
+            const dropboxTargetPath = `All files/Shiran Tal/Modus/${fileName}`;
             // Upload to Dropbox
             await uploadAndLinkToMonday(file, dropboxTargetPath, mondayItemId);
           };
         } catch (err) {
           // Ignore errors in PDF upload for now
         }
-      }, 2000);
+      }, 1000);
     };
     fetchDataAndGeneratePDF();
   }, []);
@@ -242,7 +255,7 @@ const BundleWith = () => {
   if (loading) {
     return (
       <div className="min-h-screen p-8 lg: ">
-        <Header />
+        <Header mondayData={mondayData} />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
             <div className="text-xl text-gray-600">טוען נתונים...</div>
@@ -257,7 +270,7 @@ const BundleWith = () => {
   if (error) {
     return (
       <div className="min-h-screen p-8 lg: ">
-        <Header />
+        <Header mondayData={mondayData} />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
             <div className="text-xl text-red-500">
@@ -313,7 +326,7 @@ const BundleWith = () => {
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z" />
               </svg>
-              הורד PDF של האתר
+              הורד קובץ PDF
             </>
           )}
         </button>
@@ -321,7 +334,7 @@ const BundleWith = () => {
 
       {/* Main content wrapped in pdf-content class for export */}
       <div className="pdf-content" id="pdf-content">
-        <Header />
+        <Header mondayData={mondayData} />
         <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
           <BundleServicesCard
             title="מדעי עסקים בוחרים"

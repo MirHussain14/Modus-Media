@@ -110,7 +110,7 @@ const BundleServicesCardPDF = ({
         </div>
         <div className="text-left">
           <span className="text-3xl text-gray-600 mr-2">₪</span>
-          <span className="text-5xl font-bold text-apna">{displayPrice}</span>
+          <span className="text-5xl font-bold text-apna font-outfit">{displayPrice}</span>
         </div>
       </div>
     </div>

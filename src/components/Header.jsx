@@ -1,38 +1,21 @@
 import { useState, useEffect } from "react";
-import { getItemWithParentBoardRelation } from "../monday";
 
-const Header = () => {
-  const [subitemName, setSubitemName] = useState("טורר בבא");
-  const [parentName, setParentName] = useState("בוא משקאות");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchItemData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const items = await getItemWithParentBoardRelation();
-        console.log("Fetched items:", items);
-        if (items && items.length > 0) {
-          const item = items[0];
-          if (item.name) setSubitemName(item.name);
-          if (item.parent_item?.column_values?.length > 0) {
-            const boardRelationValue = item.parent_item.column_values[0];
-            if (boardRelationValue.display_value) {
-              setParentName(boardRelationValue.display_value);
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching Monday.com data:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
+const Header = ({ mondayData }) => {
+  let subitemName = "טורר בבא";
+  let parentName = "בוא משקאות";
+  let loading = true;
+  let error = null;
+  if (mondayData && mondayData.length > 0) {
+    const item = mondayData[0];
+    if (item.name) subitemName = item.name;
+    if (item.parent_item?.column_values?.length > 0) {
+      const boardRelationValue = item.parent_item.column_values[0];
+      if (boardRelationValue.display_value) {
+        parentName = boardRelationValue.display_value;
       }
-    };
-    fetchItemData();
-  }, []);
+    }
+    loading = false;
+  }
 
   return (
     <div

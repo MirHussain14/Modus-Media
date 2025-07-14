@@ -1,37 +1,21 @@
-import { useState, useEffect } from "react";
-import { getItemWithParentBoardRelation } from "../monday";
+import React from "react";
 
-const HeaderPDF = () => {
-  const [subitemName, setSubitemName] = useState("טורר בבא");
-  const [parentName, setParentName] = useState("בוא משקאות");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchItemData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
-        const items = await getItemWithParentBoardRelation();
-        if (items && items.length > 0) {
-          const item = items[0];
-          if (item.name) setSubitemName(item.name);
-          if (item.parent_item?.column_values?.length > 0) {
-            const boardRelationValue = item.parent_item.column_values[0];
-            if (boardRelationValue.display_value) {
-              setParentName(boardRelationValue.display_value);
-            }
-          }
-        }
-      } catch (err) {
-        console.error("Error fetching Monday.com data:", err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
+const HeaderPDF = ({ mondayData }) => {
+  let subitemName = "טורר בבא";
+  let parentName = "בוא משקאות";
+  let loading = true;
+  let error = null;
+  if (mondayData && mondayData.length > 0) {
+    const item = mondayData[0];
+    if (item.name) subitemName = item.name;
+    if (item.parent_item?.column_values?.length > 0) {
+      const boardRelationValue = item.parent_item.column_values[0];
+      if (boardRelationValue.display_value) {
+        parentName = boardRelationValue.display_value;
       }
-    };
-    fetchItemData();
-  }, []);
+    }
+    loading = false;
+  }
 
   return (
     <div
@@ -105,8 +89,14 @@ const HeaderPDF = () => {
                 </>
               )}
             </div>
-            <div className="font-bold text-xl pt-8">
-              {new Date().toLocaleDateString()}
+            <div className="text-lg pt-8 font-outfit font-semibold">
+              {(() => {
+                const d = new Date();
+                const day = String(d.getDate()).padStart(2, '0');
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const year = d.getFullYear();
+                return `${day}.${month}.${year}`;
+              })()}
             </div>
           </div>
         </div>

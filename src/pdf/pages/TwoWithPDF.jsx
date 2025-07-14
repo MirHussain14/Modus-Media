@@ -112,7 +112,7 @@ const TwoWithPDF = () => {
   if (loading) {
     return (
       <div className="min-h-screen">
-        <HeaderPDF />
+        <HeaderPDF mondayData={mondayData} />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
             <div className="text-xl text-gray-600">טוען נתונים...</div>
@@ -127,7 +127,7 @@ const TwoWithPDF = () => {
   if (error) {
     return (
       <div className="min-h-screen">
-        <HeaderPDF />
+        <HeaderPDF mondayData={mondayData} />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
             <div className="text-xl text-red-500">
@@ -144,7 +144,7 @@ const TwoWithPDF = () => {
   return (
     <div className="min-h-screen py-8 px-4 twowith opacity-0 absolute top-0 left-0">
       <div id="pdf-content" className="w-[1000.97px] mx-auto">
-        <HeaderPDF />
+        <HeaderPDF mondayData={mondayData} />
         <div className="flex gap-5 justify-center mt-14 w-full">
           <BusinessServicesCardPDF
             title="מדעי עסקים בוחרים"

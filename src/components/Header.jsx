@@ -106,7 +106,7 @@ const Header = ({ mondayData }) => {
                 </>
               )}
             </div>
-            <div className="text-lg pt-2 sm:pt-3 md:pt-4 lg:pt-8 font-outfit font-semibold">
+            <div className="text-lg pt-2 sm:pt-3 md:pt-4 lg:pt-8 font-outfit">
               {(() => {
                 const d = new Date();
                 const day = String(d.getDate()).padStart(2, '0');

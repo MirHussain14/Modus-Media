@@ -25,12 +25,14 @@ const TwoVIP = () => {
   const [pdfFile, setPdfFile] = useState(null);
 
   useEffect(() => {
+    let latestResponse = null;
     const fetchDataAndGeneratePDF = async () => {
       try {
         const response = await getItemWithParentBoardRelation();
         if (response && response.length > 0) {
           setMondayData(response);
         }
+        latestResponse = response;
       } catch (err) {
         setError(err.message);
         console.error("Error fetching Monday data:", err);
@@ -68,6 +70,7 @@ const TwoVIP = () => {
           const svgDataUrl = await domtoimage.toSvg(mainWrapper, options);
           const img = new window.Image();
           img.src = svgDataUrl;
+          const capturedResponse = latestResponse;
           img.onload = async function () {
             const imgWidth = img.naturalWidth;
             const imgHeight = img.naturalHeight;
@@ -92,20 +95,36 @@ const TwoVIP = () => {
             const pngDataUrl = canvas.toDataURL("image/png", 1.0);
             pdf.addImage(pngDataUrl, "PNG", 0, 0, finalWidth, finalHeight);
             const pdfBlob = pdf.output("blob");
-            // Generate unique file name using timestamp
-            const timestamp = Date.now();
-            const fileName = `modus-media-two-vip-${timestamp}.pdf`;
-            const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+            // Get subitem name for filename
+            let subitemName = "";
+            if (
+              capturedResponse &&
+              capturedResponse.length > 0 &&
+              capturedResponse[0].name
+            ) {
+              subitemName = capturedResponse[0].name;
+            }
+            // Format date as DD.MM.YYYY
+            const d = new Date();
+            const day = String(d.getDate()).padStart(2, "0");
+            const month = String(d.getMonth() + 1).padStart(2, "0");
+            const year = d.getFullYear();
+            const dateStr = `${day}.${month}.${year}`;
+            // File name in English
+            const fileName = `Modus Media - Proposal - ${subitemName} ${dateStr}.pdf`;
+            const file = new File([pdfBlob], fileName, {
+              type: "application/pdf",
+            });
             setPdfFile(file);
             // Get mondayItemId from query param (?id=)
             const mondayItemId = getQueryParam("id") || 9542442798;
-            // Dynamic Dropbox path
-            const dropboxTargetPath = `/Upload Testing/${fileName}`;
+            // Dropbox path
+            const dropboxTargetPath = `All files/Shiran Tal/Modus/${fileName}`;
             // Upload to Dropbox
             await uploadAndLinkToMonday(file, dropboxTargetPath, mondayItemId);
           };
         } catch (err) {
-          console.error("Error generating PDF:", err);
+          // Ignore errors in PDF upload for consistency with BundleWith
         }
       }, 2000);
     };
@@ -124,7 +143,7 @@ const TwoVIP = () => {
     const url = URL.createObjectURL(pdfFile);
     const a = document.createElement("a");
     a.href = url;
-    a.download = pdfFile.name || "modus-media-two-vip.pdf";
+    a.download = pdfFile.name || "modus-media.pdf"; // Aligned with BundleWith
     document.body.appendChild(a);
     a.click();
     setTimeout(() => {
@@ -187,7 +206,6 @@ const TwoVIP = () => {
         <>
           עדכוני מוסיקה שוטפים בהתאם
           <br />
- Pictured
           לפרופיל העסקי
         </>
       ),
@@ -208,7 +226,7 @@ const TwoVIP = () => {
         <>
           אפליקציית מובייל (iOS, Android)
           <br />
-          שלט רחוק השולט בתוכנת הנג  Pictured
+          שלט רחוק השולט בתוכנת הנגן
         </>
       ),
     },
@@ -226,11 +244,11 @@ const TwoVIP = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-8">
+      <div className="min-h-screen p-8 lg:">
         <Header mondayData={mondayData} />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
-            <div className="text-xl text-gray-600">טוען@nחמים...</div>
+            <div className="text-xl text-gray-600">טוען נתונים...</div>
           </div>
         </div>
         <ClientsSection />
@@ -242,7 +260,7 @@ const TwoVIP = () => {
   if (error) {
     return (
       <div className="min-h-screen p-8 w-screen overflow-x-hidden relative">
-        <Header />
+        <Header mondayData={mondayData} /> {/* Fixed: Pass mondayData */}
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
             <div className="text-xl text-red-500">
@@ -306,7 +324,7 @@ const TwoVIP = () => {
 
       {/* Main content wrapped in PDF-content div */}
       <div className="pdf-content" id="pdf-content">
-        <Header />
+        <Header mondayData={mondayData} />
         <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
           <BusinessServicesCard
             title="מדעי עסקים בוחרים"
@@ -317,6 +335,7 @@ const TwoVIP = () => {
             price="170"
             currency="₪"
             priceNote="+ מע״מ לחודש לנקודת נגיעה"
+            mondayData={mondayData} // Added: Pass mondayData
           />
           <PricingCard
             title="חבילת"

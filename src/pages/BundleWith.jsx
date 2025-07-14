@@ -26,12 +26,14 @@ const BundleWith = () => {
 
   const [pdfFile, setPdfFile] = useState(null);
   useEffect(() => {
+    let latestResponse = null;
     const fetchDataAndGeneratePDF = async () => {
       try {
         const response = await getItemWithParentBoardRelation();
         if (response && response.length > 0) {
           setMondayData(response);
         }
+        latestResponse = response;
       } catch (err) {
         setError(err.message);
         console.error("Error fetching Monday data:", err);
@@ -69,6 +71,8 @@ const BundleWith = () => {
           const svgDataUrl = await domtoimage.toSvg(mainWrapper, options);
           const img = new window.Image();
           img.src = svgDataUrl;
+          // Capture latestResponse for use in onload
+          const capturedResponse = latestResponse;
           img.onload = async function () {
             const imgWidth = img.naturalWidth;
             const imgHeight = img.naturalHeight;
@@ -93,12 +97,12 @@ const BundleWith = () => {
             const pngDataUrl = canvas.toDataURL("image/png", 1.0);
             pdf.addImage(pngDataUrl, "PNG", 0, 0, finalWidth, finalHeight);
             const pdfBlob = pdf.output("blob");
-            // Get subitem name for filename
+            // Get subitem name for filename using capturedResponse
             let subitemName = "";
-            if (mondayData && mondayData.length > 0) {
-              const item = mondayData[0];
-              if (item.name) subitemName = item.name;
+            if (capturedResponse && capturedResponse.length > 0 && capturedResponse[0].name) {
+              subitemName = capturedResponse[0].name;
             }
+            console.log("Monday Data:", capturedResponse);
             // Format date as DD.MM.YYYY
             const d = new Date();
             const day = String(d.getDate()).padStart(2, "0");
@@ -121,7 +125,7 @@ const BundleWith = () => {
         } catch (err) {
           // Ignore errors in PDF upload for now
         }
-      }, 1000);
+      }, 2000);
     };
     fetchDataAndGeneratePDF();
   }, []);

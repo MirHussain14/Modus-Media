@@ -60,7 +60,7 @@ const PricingCard = ({ title, number, features, mondayData }) => {
         </div>
         <div className="text-left">
           <span className="text-3xl md:text-5xl text-gray-600 mr-2">₪</span>
-          <span className="text-5xl md:text-7xl font-bold text-apna">
+          <span className="text-5xl md:text-7xl font-bold text-apna font-outfit">
             {displayPrice}
           </span>
         </div>

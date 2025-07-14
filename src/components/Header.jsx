@@ -107,7 +107,7 @@ const Header = () => {
           </div>
 
           <div className="lg:text-right pt-1 sm:pt-2">
-            <div className="font-bold text-sm sm:text-base md:text-lg lg:text-2xl">
+            <div className="text-sm sm:text-base md:text-lg lg:text-2xl">
               ,לכבוד
             </div>
             <div className="text-xs sm:text-sm md:text-base lg:text-lg">
@@ -123,8 +123,14 @@ const Header = () => {
                 </>
               )}
             </div>
-            <div className="font-bold text-sm sm:text-base md:text-lg lg:text-xl pt-2 sm:pt-3 md:pt-4 lg:pt-8">
-              {new Date().toLocaleDateString()}
+            <div className="text-lg pt-2 sm:pt-3 md:pt-4 lg:pt-8 font-outfit font-semibold">
+              {(() => {
+                const d = new Date();
+                const day = String(d.getDate()).padStart(2, '0');
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const year = d.getFullYear();
+                return `${day}.${month}.${year}`;
+              })()}
             </div>
           </div>
         </div>

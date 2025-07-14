@@ -110,7 +110,7 @@ const BundleWith = () => {
             const year = d.getFullYear();
             const dateStr = `${day}.${month}.${year}`;
             // File name in English
-            const fileName = `Modus Media - Proposal - ${subitemName} ${dateStr}.pdf`;
+            const fileName = `מודוס מדיה - הצעת מחי - ${subitemName} ${dateStr}.pdf`;
             const file = new File([pdfBlob], fileName, {
               type: "application/pdf",
             });
@@ -118,7 +118,7 @@ const BundleWith = () => {
             // Get mondayItemId from query param (?id=)
             const mondayItemId = getQueryParam("id") || 9542442798;
             // Dropbox path
-            const dropboxTargetPath = `All files/Shiran Tal/Modus/${fileName}`;
+            const dropboxTargetPath = `/Shiran Tal/Modus/הצעות מחיר/${fileName}`;
             // Upload to Dropbox
             await uploadAndLinkToMonday(file, dropboxTargetPath, mondayItemId);
           };

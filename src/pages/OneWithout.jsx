@@ -107,7 +107,7 @@ const OneWithout = () => {
             const year = d.getFullYear();
             const dateStr = `${day}.${month}.${year}`;
             // File name in English
-            const fileName = `Modus Media - Proposal - ${subitemName} ${dateStr}.pdf`;
+            const fileName = `מודוס מדיה -  הצעת מחי - ${subitemName} ${dateStr}.pdf`;
             const file = new File([pdfBlob], fileName, { type: "application/pdf" });
             setPdfFile(file);
             // Get mondayItemId from query param (?id=)

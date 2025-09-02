@@ -244,7 +244,7 @@ const Vbdeo = () => {
   }
 
   return (
-    <div className="min-h-screen p-8 w-screen overflow-x-hidden relative">
+    <div className="p-8 max-w-[1150px] rounded-3xl mx-auto overflow-x-hidden relative bg-white">
       {/* Site PDF Download Button */}
       <div className="fixed top-4 left-4 z-50">
         <button

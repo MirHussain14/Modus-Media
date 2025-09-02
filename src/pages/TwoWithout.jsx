@@ -231,7 +231,7 @@ const TwoWithout = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-8 lg:">
+      <div className="min-h-screen p-8 bg-white">
         <Header mondayData={mondayData} />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">

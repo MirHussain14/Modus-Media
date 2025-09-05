@@ -244,7 +244,7 @@ const TwoVIP = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-8 bg-white">
+      <div className="min-h-screen p-8 bg-white z-[-2]">
         <Header mondayData={mondayData} />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
@@ -275,8 +275,7 @@ const TwoVIP = () => {
   }
 
   return (
-    <div className="p-8 max-w-[1150px] mx-auto overflow-x-hidden relative bg-white">
-      {/* Site PDF Download Button */}
+    <>
       <div className="fixed top-4 left-4 z-50">
         <button
           onClick={downloadSiteSVG}
@@ -321,36 +320,39 @@ const TwoVIP = () => {
           )}
         </button>
       </div>
+      <div className="p-8 max-w-[1150px] mx-auto overflow-x-hidden relative bg-white z-[-2]">
+        {/* Site PDF Download Button */}
 
-      {/* Main content wrapped in PDF-content div */}
-      <div className="pdf-content" id="pdf-content">
-        <Header mondayData={mondayData} />
-        <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
-          <BusinessServicesCard
-            title="מדעי עסקים בוחרים"
-            subtitle="במודוס מדיה"
-            packageTitle="חבילת"
-            packageNumber="1"
-            features={package1Features}
-            price="170"
-            currency="₪"
-            priceNote="+ מע״מ לחודש לנקודת נגיעה"
-            mondayData={mondayData} // Added: Pass mondayData
-          />
-          <PricingCard
-            title="חבילת"
-            number="2"
-            features={package2Features}
-            price="170"
-            mondayData={mondayData}
-          />
+        {/* Main content wrapped in PDF-content div */}
+        <div className="pdf-content" id="pdf-content">
+          <Header mondayData={mondayData} />
+          <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
+            <BusinessServicesCard
+              title="מדעי עסקים בוחרים"
+              subtitle="במודוס מדיה"
+              packageTitle="חבילת"
+              packageNumber="1"
+              features={package1Features}
+              price="170"
+              currency="₪"
+              priceNote="+ מע״מ לחודש לנקודת נגיעה"
+              mondayData={mondayData} // Added: Pass mondayData
+            />
+            <PricingCard
+              title="חבילת"
+              number="2"
+              features={package2Features}
+              price="170"
+              mondayData={mondayData}
+            />
+          </div>
+          <ClientsSection />
+          <Footer />
         </div>
-        <ClientsSection />
-        <Footer />
+        <TwoVIPPDF />
+        <FooterMobile />
       </div>
-      <TwoVIPPDF />
-      <FooterMobile />
-    </div>
+    </>
   );
 };
 

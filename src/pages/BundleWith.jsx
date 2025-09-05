@@ -99,7 +99,11 @@ const BundleWith = () => {
             const pdfBlob = pdf.output("blob");
             // Get subitem name for filename using capturedResponse
             let subitemName = "";
-            if (capturedResponse && capturedResponse.length > 0 && capturedResponse[0].name) {
+            if (
+              capturedResponse &&
+              capturedResponse.length > 0 &&
+              capturedResponse[0].name
+            ) {
               subitemName = capturedResponse[0].name;
             }
             console.log("Monday Data:", capturedResponse);
@@ -258,7 +262,7 @@ const BundleWith = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-8 bg-white">
+      <div className="min-h-screen p-8 bg-white z-[-2]">
         <Header mondayData={mondayData} />
         <div className="flex items-center justify-center mt-20">
           <div className="text-center">
@@ -289,8 +293,7 @@ const BundleWith = () => {
   }
 
   return (
-    <div className="p-8 max-w-[1150px] mx-auto overflow-x-hidden relative bg-white">
-      {/* Site PDF Download Button */}
+    <>
       <div className="fixed top-4 left-4 z-50">
         <button
           onClick={downloadSiteSVG}
@@ -335,37 +338,40 @@ const BundleWith = () => {
           )}
         </button>
       </div>
+      <div className="p-8 max-w-[1150px] mx-auto overflow-x-hidden relative bg-white z-[-2]">
+        {/* Site PDF Download Button */}
 
-      {/* Main content wrapped in pdf-content class for export */}
-      <div className="pdf-content" id="pdf-content">
-        <Header mondayData={mondayData} />
-        <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
-          <BundleServicesCard
-            title="מדעי עסקים בוחרים"
-            subtitle="במודוס מדיה"
-            packageTitle="חבילת"
-            packageNumber="1"
-            features={package1Features}
-            price="170"
-            currency="₪"
-            priceNote="+ מע״מ לחודש לנקודת נגיעה"
-            mondayData={mondayData}
-          />
-          <BundlePricing
-            title="חבילת"
-            number="bundle"
-            features={package2Features}
-            price="170"
-          />
+        {/* Main content wrapped in pdf-content class for export */}
+        <div className="pdf-content" id="pdf-content">
+          <Header mondayData={mondayData} />
+          <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
+            <BundleServicesCard
+              title="מדעי עסקים בוחרים"
+              subtitle="במודוס מדיה"
+              packageTitle="חבילת"
+              packageNumber="1"
+              features={package1Features}
+              price="170"
+              currency="₪"
+              priceNote="+ מע״מ לחודש לנקודת נגיעה"
+              mondayData={mondayData}
+            />
+            <BundlePricing
+              title="חבילת"
+              number="bundle"
+              features={package2Features}
+              price="170"
+            />
+          </div>
+
+          <ClientsSection />
+          <Footer />
         </div>
 
-        <ClientsSection />
-        <Footer />
+        <FooterMobile />
+        <BundleWithPDF />
       </div>
-
-      <FooterMobile />
-      <BundleWithPDF />
-    </div>
+    </>
   );
 };
 

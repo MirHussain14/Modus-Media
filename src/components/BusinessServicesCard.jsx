@@ -40,7 +40,7 @@ const BusinessServicesCard = ({
   const displayFeatures = features.length > 0 ? features : defaultFeatures;
 
   return (
-    <div className="bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl p-8 text-right flex flex-col relative">
+    <div className="bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl py-8 text-right flex flex-col relative">
       <h1
         dir="rtl"
         className="text-center font-bold text-4xl w-[80%] mx-auto text-dark mb-2 leading-snug"
@@ -60,7 +60,7 @@ const BusinessServicesCard = ({
         </div>
       </div>
       {/* Bottom Features Grid - Original 6 features layout */}
-      <div className="grid grid-cols-2 gap-6 pt-16">
+      <div className="grid grid-cols-2 gap-6 pt-16 px-8">
         {defaultFeatures.map((feature, index) => (
           <div key={index} className="text-right">
             <h3 className="font-bold text-[#0c1d50] mb-2 text-xl">

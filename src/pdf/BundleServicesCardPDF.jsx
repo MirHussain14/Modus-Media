@@ -68,7 +68,7 @@ const BundleServicesCardPDF = ({
 
   return (
     <div>
-      <div className="bg-[#FAFAFA] w-[450px] rounded-3xl p-8 text-right flex flex-col relative">
+      <div className="bg-[#FAFAFA] w-[450px] rounded-3xl py-8 text-right flex flex-col relative">
         <h1
           dir="rtl"
           className="text-center font-bold text-4xl w-[80%] mx-auto text-[#0c1d50] mb-2 leading-snug"
@@ -81,10 +81,10 @@ const BundleServicesCardPDF = ({
           <div className="background w-full">
             <img className="w-[110%]" src="/Vector 9 (Stroke).png" alt="" />
           </div>
-          <div className="laptop absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
+          <div className="laptop absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full">
             <img className="w-[80%] mx-auto" src="/Mask group 1.png" alt="" />
           </div>
-          <div className="mobile absolute top-[55%] left-[60%] -translate-x-1/2 -translate-y-1/2">
+          <div className="mobile absolute top-[60%] left-[60%] -translate-x-1/2 -translate-y-1/2">
             <img className="w-[90%]" src="/Слой 111 1.png" alt="" />
           </div>
         </div>
@@ -92,7 +92,7 @@ const BundleServicesCardPDF = ({
         {/* Bottom Features Grid */}
         <div className="grid grid-cols-2 gap-6 pt-16">
           {defaultFeatures.map((feature, index) => (
-            <div key={index} className="text-right">
+            <div key={index} className="text-right px-8">
               <h3 className="font-bold text-[#0c1d50] mb-2 text-xl">
                 {feature.title}
               </h3>

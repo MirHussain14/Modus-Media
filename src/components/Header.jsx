@@ -20,15 +20,15 @@ const Header = ({ mondayData }) => {
   return (
     <div
       dir="ltr"
-      className="relative bg-[#0B225F] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-7 pe-6 md:pe-10 lg:pe-60 rounded-2xl sm:rounded-3xl md:rounded-4xl flex w-full md:max-w-[1000.97px] max-h-[435.84px] mx-auto"
+      className="relative bg-[#0B225F] text-white px-5 sm:px-6 md:px-8 py-4 sm:py-5 md:py-7 pe-2 md:pe-10 lg:pe-60 rounded-2xl sm:rounded-3xl md:rounded-4xl flex w-full md:max-w-[1100.97px] max-h-[435.84px] mx-auto"
     >
       {/* Vertical Label */}
       <div className="absolute -top-[7%] right-3 md:right-10 h-full">
-        <div className="bg-apna h-[115%] w-20 sm:w-24 md:w-28 lg:w-36 rounded-md sm:rounded-lg flex items-center justify-center">
-          <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute -left-[8%] top-[2.6%] -z-1 rotate-[41deg] md:rotate-[40deg]"></div>
-          <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute md:-left-[8%] -left-[7%] -bottom-[12%] md:-bottom-[12.3%] -z-1 rotate-[55deg] md:rotate-[50deg]"></div>
+        <div className="bg-apna h-[115%] w-16 md:w-28 lg:w-36 rounded-md sm:rounded-lg flex items-center justify-center">
+          <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute -left-[5.6%] md:-left-[7.5%] top-[2.6%] -z-1 rotate-[30deg] md:rotate-[40deg]"></div>
+          <div className="bg-[#024B94] h-4 w-4 sm:h-6 sm:w-6 md:h-8 md:w-8 absolute md:-left-[8%] -left-[6%] -bottom-[11.5%] md:-bottom-[12.3%] -z-1 rotate-[60deg] md:rotate-[50deg]"></div>
           <span
-            className="text-white text-2xl sm:text-2xl md:text-[55px] font-bold transform rotate-180 ps-20 md:ps-0"
+            className="text-white text-2xl sm:text-2xl md:text-[55px] font-bold transform rotate-180 md:ps-0 justify-center "
             style={{ writingMode: "vertical-rl" }}
           >
             מודוס <span className="font-light">מדיה</span>

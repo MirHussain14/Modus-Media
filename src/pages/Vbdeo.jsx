@@ -43,7 +43,7 @@ const Vbdeo = () => {
       // Wait for DOM to render
       setTimeout(async () => {
         try {
-          const mainWrapper = document.querySelector(".video"); // Fixed: Changed from .vbdeo to .video
+          const mainWrapper = document.querySelector(".vbdeo");
           if (!mainWrapper) return;
           const options = {
             quality: 1,

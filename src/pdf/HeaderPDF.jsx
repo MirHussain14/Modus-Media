@@ -75,7 +75,7 @@ const HeaderPDF = ({ mondayData }) => {
           </div>
 
           <div className="pt-1 text-right">
-            <div className="font-bold text-2xl">,לכבוד</div>
+            <div className="font-bold text-xl">,לכבוד</div>
             <div className="text-lg">
               {loading && <span className="text-gray-300">טוען נתונים...</span>}
               {error && (

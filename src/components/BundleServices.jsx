@@ -90,19 +90,19 @@ const BundleServicesCard = ({
         <div className="grid grid-cols-2 gap-6 pt-16">
           {defaultFeatures.map((feature, index) => (
             <div key={index} className="text-right">
-              <h3 className="font-bold text-[#0c1d50] mb-2 text-xl">
+              <h3 className="font-bold text-[#0c1d50] mb-2 text-lg">
                 {feature.title}
               </h3>
-              <p className="text-xs text-gray-500">{feature.description}</p>
+              <p className="text-[10px] text-gray-500">{feature.description}</p>
             </div>
           ))}
         </div>
       </div>
       <div className="flex justify-between md:gap-0 w-full ps-3 ms-auto items-center mt-20">
-        <div className="right">
-          <p className="text-sm md:text-base text-blue-900">+ מע"מ</p>
-          <p className="text-sm md:text-base text-gray-500">לחודש</p>
-          <p className="text-sm md:text-base text-gray-500">{quantityText}</p>
+        <div className="right ">
+          <p className="text-sm md:text-lg leading-4 md:leading-tight text-blue-900"> מע"מ +</p>
+          <p className="text-sm md:text-lg leading-4 md:leading-tight text-gray-500">לחודש</p>
+          <p className="text-sm md:text-lg leading-4 md:leading-tight text-gray-500">{quantityText}</p>
         </div>
         <div className="text-left">
           <span className="text-3xl md:text-5xl text-gray-600 mr-2">₪</span>

@@ -63,10 +63,10 @@ const BusinessServicesCard = ({
       <div className="grid grid-cols-2 gap-6 pt-16 px-8">
         {defaultFeatures.map((feature, index) => (
           <div key={index} className="text-right">
-            <h3 className="font-bold text-[#0c1d50] mb-2 text-xl">
+            <h3 className="font-bold text-[#0c1d50] mb-2 text-lg">
               {feature.title}
             </h3>
-            <p className="text-xs text-gray-500">
+            <p className="text-[10px] text-gray-500">
               {feature.description}
             </p>
           </div>

@@ -90,7 +90,7 @@ const Header = ({ mondayData }) => {
           </div>
 
           <div className="lg:text-right pt-1 sm:pt-2">
-            <div className="text-sm sm:text-base md:text-lg lg:text-2xl">
+            <div className="text-sm sm:text-base md:text-lg lg:text-xl">
               ,לכבוד
             </div>
             <div className="text-xs sm:text-sm md:text-base lg:text-lg">

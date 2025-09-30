@@ -2,10 +2,10 @@ import mondaySdk from "monday-sdk-js";
 import { Dropbox } from "dropbox";
 
 // Load environment variables (Vite style)
-const MONDAY_API_TOKEN = import.meta.env.VITE_MONDAY_API_TOKEN;
-const DROPBOX_CLIENT_ID = import.meta.env.VITE_DROPBOX_CLIENT_ID;
-const DROPBOX_CLIENT_SECRET = import.meta.env.VITE_DROPBOX_CLIENT_SECRET;
-const DROPBOX_REFRESH_TOKEN = import.meta.env.VITE_DROPBOX_REFRESH_TOKEN;
+const MONDAY_API_TOKEN = process.env.VITE_MONDAY_API_TOKEN;
+const DROPBOX_CLIENT_ID = process.env.VITE_DROPBOX_CLIENT_ID;
+const DROPBOX_CLIENT_SECRET = process.env.VITE_DROPBOX_CLIENT_SECRET;
+const DROPBOX_REFRESH_TOKEN = process.env.VITE_DROPBOX_REFRESH_TOKEN;
 
 
 // Monday.com SDK

@@ -1,17 +1,25 @@
 import mondaySdk from "monday-sdk-js";
 import { Dropbox } from "dropbox";
 
+// Load environment variables (Vite style)
+const MONDAY_API_TOKEN = import.meta.env.VITE_MONDAY_API_TOKEN;
+const DROPBOX_CLIENT_ID = import.meta.env.VITE_DROPBOX_CLIENT_ID;
+const DROPBOX_CLIENT_SECRET = import.meta.env.VITE_DROPBOX_CLIENT_SECRET;
+const DROPBOX_REFRESH_TOKEN = import.meta.env.VITE_DROPBOX_REFRESH_TOKEN;
+
 
 // Monday.com SDK
 const monday = mondaySdk();
-monday.setToken(
-  "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjUzMzQ5MTkzNiwiYWFpIjoxMSwidWlkIjozODk4NjMyMiwiaWFkIjoiMjAyNS0wNy0wMVQxNjoxODo0Mi4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTM2NDg4MDgsInJnbiI6InVzZTEifQ.0YxDOYQRzQwTZdIUhRFaSktOITLMiTOmDZqhuayxUr0"
-);
+if (MONDAY_API_TOKEN) {
+  monday.setToken(MONDAY_API_TOKEN);
+} else {
+  console.warn("MONDAY_API_TOKEN is not set in environment variables.");
+}
 
 // Dropbox SDK setup
 const dbx = new Dropbox({
-  clientId: "	8li2m6ylm3opvzg",
-  clientSecret: "10o9f1omqxixwj7",
+  clientId: DROPBOX_CLIENT_ID,
+  clientSecret: DROPBOX_CLIENT_SECRET,
 });
 
 
@@ -26,9 +34,7 @@ export async function uploadAndLinkToMonday(
 ) {
   try {
     // Step 1: Refresh Dropbox token
-    dbx.auth.setRefreshToken(
-      "8y6mdvGrluIAAAAAAAAAAZJBUyEtlksV35MfsBitzrMyk1sh1k40-feIusmYNdmH"
-    );
+    dbx.auth.setRefreshToken(DROPBOX_REFRESH_TOKEN);
     await dbx.auth.refreshAccessToken();
     console.log("✅ Dropbox Access Token Refreshed");
 

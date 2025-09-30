@@ -1,7 +1,6 @@
 // Monday.com API configuration
 const MONDAY_API_URL = "https://api.monday.com/v2";
-const API_TOKEN =
-  "eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjUzMzQ5MTkzNiwiYWFpIjoxMSwidWlkIjozODk4NjMyMiwiaWFkIjoiMjAyNS0wNy0wMVQxNjoxODo0Mi4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTM2NDg4MDgsInJnbiI6InVzZTEifQ.0YxDOYQRzQwTZdIUhRFaSktOITLMiTOmDZqhuayxUr0"; // Replace with your actual API token
+const API_TOKEN = import.meta.env.VITE_MONDAY_API_TOKEN;
 
 // Function to make API calls to Monday.com using fetch
 const mondayApiCall = async (query) => {

@@ -1,6 +1,6 @@
 // Monday.com API configuration
 const MONDAY_API_URL = "https://api.monday.com/v2";
-const API_TOKEN = process.env.VITE_MONDAY_API_TOKEN;
+const API_TOKEN = import.meta.env.VITE_MONDAY_API_TOKEN;
 
 // Function to make API calls to Monday.com using fetch
 const mondayApiCall = async (query) => {

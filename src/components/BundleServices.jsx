@@ -67,7 +67,7 @@ const BundleServicesCard = ({
   const quantityText = getQuantityText();
   return (
     <div>
-      <div className="bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl p-8 text-right flex flex-col relative">
+      <div className="bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl py-8 text-right flex flex-col relative">
         <h1
           dir="rtl"
           className="text-center font-bold text-4xl w-[80%] mx-auto text-[#0c1d50] mb-2 leading-snug"
@@ -80,14 +80,14 @@ const BundleServicesCard = ({
             <img className="w-[110%]" src="/Vector 9 (Stroke).png" alt="" />
           </div>
           <div className="laptop absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%]">
-            <img className="w-[80%] mx-auto" src="/Mask group 1.png" alt="" />
+            <img className="w-[70%] mx-auto" src="/Mask group 1.png" alt="" />
           </div>
           <div className="mobile absolute top-[55%] left-[60%] -translate-x-1/2 -translate-y-1/2">
-            <img className="w-[90%]" src="/Слой 111 1.png" alt="" />
+            <img className="w-[80%]" src="/Слой 111 1.png" alt="" />
           </div>
         </div>
         {/* Bottom Features Grid - Original 6 features layout */}
-        <div className="grid grid-cols-2 gap-6 pt-16">
+        <div className="grid grid-cols-2 gap-3 pt-0 px-8">
           {defaultFeatures.map((feature, index) => (
             <div key={index} className="text-right">
               <h3 className="font-bold text-[#0c1d50] mb-2 text-lg">
@@ -98,8 +98,8 @@ const BundleServicesCard = ({
           ))}
         </div>
       </div>
-      <div className="flex justify-between md:gap-0 w-full ps-3 ms-auto items-center mt-20">
-        <div className="right ">
+      <div className="flex justify-end gap-6 w-full ps-3 ms-auto items-center mt-8">
+        <div dir="rtl" className="flex flex-col text-right">
           <p className="text-sm md:text-lg leading-4 md:leading-tight text-blue-900"> מע"מ +</p>
           <p className="text-sm md:text-lg leading-4 md:leading-tight text-gray-500">לחודש</p>
           <p className="text-sm md:text-lg leading-4 md:leading-tight text-gray-500">{quantityText}</p>

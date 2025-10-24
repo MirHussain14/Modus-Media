@@ -25,12 +25,12 @@ const PricingCard = ({ title, number, features, mondayData }) => {
 
   return (
     <div
-      className={`bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl p-8 text-right flex flex-col justify-between relative`}
+      className={`bg-[#FAFAFA] md:w-[450px] max-w-[500px] rounded-3xl p-8 text-right flex flex-col relative justify-between`}
     >
       <div>
         <div className="mb-10">
           <div className="text-apna text-4xl mb-2">{title}</div>
-          <div className="flex justify-end space-x-2">
+          <div className="flex justify-end space-x-3">
             <div
               className={`bg-apna text-white rounded-2xl ${
                 number == 1 ? "px-6" : "md:px-5"
@@ -45,14 +45,14 @@ const PricingCard = ({ title, number, features, mondayData }) => {
           </div>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-10">
           {features.map((feature, index) => (
             <FeatureItem key={index} icon={feature.icon} text={feature.text} />
           ))}
         </div>
       </div>
 
-      <div className="flex justify-between md:gap-0 w-full ps-3 ms-auto items-center mt-20">
+      <div className="flex justify-between md:gap-0 w-full ps-3 ms-auto items-center mt-8 md:mt-0">
         <div className="right">
           <p className="text-sm md:text-lg md:leading-tight leading-4 text-blue-900">מע"מ +</p>
           <p className="text-sm md:text-lg md:leading-tight leading-4 text-gray-500">לחודש</p>

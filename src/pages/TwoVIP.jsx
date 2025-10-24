@@ -326,7 +326,7 @@ const TwoVIP = () => {
         {/* Main content wrapped in PDF-content div */}
         <div className="pdf-content" id="pdf-content">
           <Header mondayData={mondayData} />
-          <div className="flex flex-col-reverse md:flex-row gap-5 justify-center md:mt-20 mt-14 w-full">
+          <div className="flex flex-col-reverse md:flex-row gap-15 justify-center md:mt-20 mt-14 w-full">
             <BusinessServicesCard
               title="מדעי עסקים בוחרים"
               subtitle="במודוס מדיה"

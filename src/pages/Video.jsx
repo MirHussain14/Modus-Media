@@ -251,7 +251,7 @@ const Video = () => {
 
   return (
     <>
-      <div className="fixed top-4 left-4 z-50">
+      <div className="fixed top-4 left-4 z-50 overflow-hidden">
         <button
           onClick={downloadSiteSVG}
           disabled={isDownloading || !pdfFile}
@@ -295,7 +295,7 @@ const Video = () => {
           )}
         </button>
       </div>
-      <div className="p-8 max-w-[1150px] mx-auto overflow-x-hidden relative bg-white z-[-2] video">
+      <div className="p-8 max-w-[1150px] mx-auto overflow-x-hidden relative bg-white z-[-2] video overflow-hidden">
         {/* Site PDF Download Button */}
 
         {/* Main content wrapped in PDF-content div */}

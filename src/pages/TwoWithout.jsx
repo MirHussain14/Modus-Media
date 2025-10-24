@@ -269,7 +269,7 @@ const TwoWithout = () => {
 
   return (
     <>
-      <div className="fixed top-4 left-4 z-50">
+      <div className="fixed top-4 left-4 z-50 overflow-hidden">
         <button
           onClick={downloadSiteSVG}
           disabled={isDownloading || !pdfFile}
@@ -313,7 +313,7 @@ const TwoWithout = () => {
           )}
         </button>
       </div>
-      <div className="p-8 max-w-[1150px] mx-auto overflow-x-hidden relative bg-white z-[-2]">
+      <div className="p-8 max-w-[1150px] mx-auto overflow-x-hidden relative bg-white z-[-2] overflow-hidden">
         {/* Site PDF Download Button */}
 
         {/* Main content wrapped in PDF-content div */}

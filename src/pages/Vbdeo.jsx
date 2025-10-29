@@ -46,7 +46,7 @@ const Vbdeo = () => {
           const mainWrapper = document.querySelector(".vbdeo");
           if (!mainWrapper) return;
           const options = {
-            quality: 1,
+            quality: 1.0,
             width: mainWrapper.scrollWidth,
             height: mainWrapper.scrollHeight,
             style: {
@@ -85,15 +85,15 @@ const Vbdeo = () => {
             });
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
-            const canvasScale = 2;
+            const canvasScale = 10;
             canvas.width = imgWidth * canvasScale;
             canvas.height = imgHeight * canvasScale;
             ctx.scale(canvasScale, canvasScale);
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, imgWidth, imgHeight);
             ctx.drawImage(img, 0, 0);
-            const pngDataUrl = canvas.toDataURL("image/png", 1.0);
-            pdf.addImage(pngDataUrl, "PNG", 0, 0, finalWidth, finalHeight);
+            const pngDataUrl = canvas.toDataURL("image/jpeg", 1.0);
+            pdf.addImage(pngDataUrl, "JPEG", 0, 0, finalWidth, finalHeight);
             const pdfBlob = pdf.output("blob");
             // Get subitem name for filename
             let subitemName = "";
